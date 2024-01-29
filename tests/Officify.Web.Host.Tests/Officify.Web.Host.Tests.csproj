@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="bunit" Version="1.26.64" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Officify.Web.Host\Officify.Web.Host.csproj" />
+  </ItemGroup>
+
+</Project>
