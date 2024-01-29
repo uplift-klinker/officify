@@ -41,6 +41,3 @@ jobs:
         
       - run: dotnet test --no-build --no-restore
         name: Run Tests
-        
-      - run: kill $(jobs -p)
-        name: Kill Backgrounded Jobs
