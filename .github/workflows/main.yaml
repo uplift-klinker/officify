@@ -5,7 +5,7 @@ on:
       - main
 env:
   NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
-  BUILD_CONFIGURATION: Release
+  CONFIGURATION: Release
 jobs:
   verify:
     name: Build
