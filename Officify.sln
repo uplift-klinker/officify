@@ -40,6 +40,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".scm", ".scm", "{77D10FCE-A
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Features", "tests\Officify.Features\Officify.Features.csproj", "{8C4D497B-388C-4A56-A84B-2A0052E6BD35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{CC088258-F4FF-4F3D-A915-931A8760B732}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+		docs\developer-setup.md = docs\developer-setup.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +85,10 @@ Global
 		{08F34534-731D-44DB-AB45-CC8463CABF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08F34534-731D-44DB-AB45-CC8463CABF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08F34534-731D-44DB-AB45-CC8463CABF6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C4D497B-388C-4A56-A84B-2A0052E6BD35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C4D497B-388C-4A56-A84B-2A0052E6BD35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C4D497B-388C-4A56-A84B-2A0052E6BD35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C4D497B-388C-4A56-A84B-2A0052E6BD35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D9367A47-F910-48D8-8863-430348E9ABE1} = {9D318D41-A842-4D8A-80BE-37BF6EE137CB}
@@ -86,5 +98,6 @@ Global
 		{69C07476-41BF-4293-A738-CF4590BADB09} = {9D318D41-A842-4D8A-80BE-37BF6EE137CB}
 		{826A6716-930D-4528-A08C-6F0A0FE135AD} = {BCD8AE65-370A-43AA-8F59-979DECE08B98}
 		{08F34534-731D-44DB-AB45-CC8463CABF6D} = {9D318D41-A842-4D8A-80BE-37BF6EE137CB}
+		{8C4D497B-388C-4A56-A84B-2A0052E6BD35} = {BCD8AE65-370A-43AA-8F59-979DECE08B98}
 	EndGlobalSection
 EndGlobal

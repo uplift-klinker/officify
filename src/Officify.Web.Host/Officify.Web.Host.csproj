@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.1" PrivateAssets="all" />
@@ -9,4 +8,11 @@
     <ProjectReference Include="..\Officify.Models\Officify.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\app.css" />
+  </ItemGroup>
+  
+  <Target Name="BundleCss" AfterTargets="Build">
+    <Exec Command="npx tailwindcss -i ./wwwroot/css/app.css -o wwwroot/css/app.min.css" />
+  </Target>
 </Project>
