@@ -1,0 +1,36 @@
+name: Main Build
+on:
+  push:
+    branches:
+      - main
+env:
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+  BUILD_CONFIGURATION: Release
+jobs:
+  verify:
+    name: Build
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: global.json
+          cache: true
+
+      - run: dotnet tool restore
+        name: Restore Dotnet Tools
+      
+      - run: dotnet restore --locked-mode
+        name: Restore Packages
+      
+      - run: dotnet build --no-restore
+        name: Build All
+        
+      - run: docker-compose up -d
+        name: Start Docker Services
+      
+      - run: asrs-emulator start
+        name: Start Azure SignalR Emulator
+        
+      - run: dotnet test --no-build --no-restore
+        name: Run Tests
