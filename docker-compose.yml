@@ -8,11 +8,21 @@ services:
       - "10001:10001"
   
   officify_service:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: src/Officify.Service.Host/Dockerfile
-    platform: linux/amd64
     ports:
-      - "8080:80"
+      - "5002:80"
     depends_on: 
       - azurite
+  
+  officify_web:
+    build:
+      context: .
+      dockerfile: src/Officify.Web.Host/Dockerfile
+    ports:
+      - "5000:80"
+    depends_on: 
+      - azurite
+      - officify_service

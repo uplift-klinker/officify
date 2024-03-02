@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.1" PrivateAssets="all" />
@@ -11,8 +12,15 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\app.css" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
+  </ItemGroup>
   
   <Target Name="BundleCss" AfterTargets="Build">
+    <Exec Command="npm install" />
     <Exec Command="npx tailwindcss -i ./wwwroot/css/app.css -o wwwroot/css/app.min.css" />
   </Target>
 </Project>
