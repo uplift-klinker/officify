@@ -20,7 +20,6 @@ RUN dotnet restore "src/Officify.Web.Host/Officify.Web.Host.csproj"
 
 COPY . .
 
-RUN ls -la
 RUN dotnet build "src/Officify.Web.Host/Officify.Web.Host.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
@@ -29,7 +28,6 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "src/Officify.Web.Host/Officify.Web.Host.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM busybox:latest AS final
-EXPOSE 80
 WORKDIR /home/static
 COPY --from=publish /app/publish .
 ENTRYPOINT ["busybox", "httpd", "-f", "-v", "-p", "80"]
