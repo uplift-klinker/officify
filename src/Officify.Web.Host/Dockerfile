@@ -27,7 +27,6 @@ ARG BUILD_CONFIGURATION=Release
 
 RUN dotnet publish "src/Officify.Web.Host/Officify.Web.Host.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-FROM busybox:latest AS final
-WORKDIR /home/static
-COPY --from=publish /app/publish .
-ENTRYPOINT ["busybox", "httpd", "-f", "-v", "-p", "80"]
+FROM nginx:alpine AS final
+COPY ["src/Officify.Web.Host/nginx.conf", "/etc/nginx/nginx.conf"]
+COPY --from=publish /app/publish/wwwroot /app/publish
