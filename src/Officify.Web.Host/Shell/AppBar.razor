@@ -1,0 +1,15 @@
+<MudAppBar>
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="@HandleMenuButtonClick">
+        Officify
+    </MudIconButton>
+</MudAppBar>
+
+@code {
+    [Parameter]
+    public EventCallback OnToggleDrawer { get; set; }
+
+    private async Task HandleMenuButtonClick()
+    {
+        await OnToggleDrawer.InvokeAsync();
+    }
+}

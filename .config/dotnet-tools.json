@@ -19,6 +19,12 @@
       "commands": [
         "asrs-emulator"
       ]
+    },
+    "cake.tool": {
+      "version": "4.0.0",
+      "commands": [
+        "dotnet-cake"
+      ]
     }
   }
 }

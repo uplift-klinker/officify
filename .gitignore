@@ -3,3 +3,6 @@ bin/
 obj/
 **/.DS_Store
 node_modules/
+tools/Addins/
+**/*.user
+*.user

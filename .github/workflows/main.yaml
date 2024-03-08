@@ -30,14 +30,4 @@ jobs:
       - run: dotnet restore --locked-mode
         name: Restore Packages
       
-      - run: dotnet build --no-restore
-        name: Build All
-        
-      - run: docker-compose up -d
-        name: Start Docker Services
-      
-      - run: dotnet asrs-emulator start &
-        name: Start Azure SignalR Emulator
-        
-      - run: dotnet test --no-build --no-restore
-        name: Run Tests
+      - run: dotnet cake
