@@ -1,5 +1,5 @@
 <MudAppBar>
-    <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="@HandleMenuButtonClick">
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="@HandleMenuButtonClick" UserAttributes="@MenuAttributes">
         Officify
     </MudIconButton>
 </MudAppBar>
@@ -7,6 +7,12 @@
 @code {
     [Parameter]
     public EventCallback OnToggleDrawer { get; set; }
+
+    private Dictionary<string, object?> MenuAttributes { get; } = new()
+    {
+        {"aria-label", "menu"},
+        {"role", "button"}
+    };
 
     private async Task HandleMenuButtonClick()
     {

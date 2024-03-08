@@ -5,9 +5,19 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <AppBar />
-    <AppDrawer />
+    <AppBar OnToggleDrawer="@HandleToggleDrawer"/>
+    <AppDrawer IsOpen="@IsDrawerOpen" />
     <MainContent>
         @Body
     </MainContent>    
 </MudLayout>
+
+@code {
+    private bool IsDrawerOpen { get; set; }
+    
+    private void HandleToggleDrawer()
+    {
+        IsDrawerOpen = !IsDrawerOpen;
+    }
+
+}
