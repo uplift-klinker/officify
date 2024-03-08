@@ -1,5 +1,6 @@
 #addin nuget:?package=Cake.Docker&version=1.3.0
 #addin nuget:?package=Cake.Http&version=4.0.0
+#addin nuget:?package=Cake.Incubator&version=8.0.0
 
 var target = Argument("target", "Verify");
 var configuration = Argument("configuration", "Release");
@@ -66,7 +67,7 @@ Task("AcceptanceTests")
     {
         Teardown();
     });
-    
+
 Task("Verify")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTests")
@@ -77,7 +78,7 @@ RunTarget(target);
 public void Teardown() 
 {
     DockerComposeDown();
-    StopSignalREmulator(signalRProcess);
+    StopSignalREmulator();
 }
 
 public void StartSignalREmulator() 
@@ -94,14 +95,25 @@ public void StartSignalREmulator()
 
 public void StopSignalREmulator() 
 {
+    var processId = GetSignalREmulatorProcessId();
+    Information("Killing SignalR Emulator with process id {0}", processId);
+    StartProcess("kill", $"-9 {processId}");
+}
+
+public string GetSignalREmulatorProcessId() 
+{
     var settings = new ProcessSettings()
-        .WithArguments(args => args.AppendSwitch("i", "8888"));
-        
-    using (var process = StartAndReturnProcess("lsof", 
-    if (process != null)
+            .SetRedirectStandardOutput(true)
+            .WithArguments(args => {
+                args.Append("-Fp -i:8888");
+            });
+    using (var process = StartAndReturnProcess("lsof", settings))
     {
-        Information("Killing SignalR Emulator");
-        process.Kill();
-        Information("Killed SignalR Emulator exit code {0}", process.GetExitCode());
+        Information("Getting Process Id for SignalR Emulator");
+        process.WaitForExit();
+        var output = process.GetStandardOutput().First();
+        var processId = output.Replace("p", "");
+        Information("Process Id for SignalR Emulator is {0}", processId);
+        return processId;
     }
 }
