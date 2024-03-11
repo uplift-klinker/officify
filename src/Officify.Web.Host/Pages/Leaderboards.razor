@@ -1,0 +1,31 @@
+@page "/leaderboards"
+@using Officify.Models
+@using Officify.Models.Leaderboard
+@inject OfficifyApiClient Api;
+
+<MudTable Items="@List.Items" Loading="@IsLoading">
+    <HeaderContent>
+        <MudTh>Rank</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Value</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTr role="listitem">
+            <MudTd DataLabel="Rank">@context.Rank</MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Value">@context.Value</MudTd>
+        </MudTr>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private bool IsLoading { get; set; }
+    private ListResult<LeaderboardItemModel> List { get; set; } = ListResult<LeaderboardItemModel>.EmptyListResult();
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsLoading = true;
+        List = await Api.GetLeaderBoardsAsync();
+        IsLoading = false;
+    }
+}

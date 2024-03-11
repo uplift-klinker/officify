@@ -6,6 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Officify.Api.Client\Officify.Api.Client.csproj" />
     <ProjectReference Include="..\Officify.Models\Officify.Models.csproj" />
   </ItemGroup>
 
@@ -17,5 +18,9 @@
     <Content Include="..\..\.dockerignore">
       <Link>.dockerignore</Link>
     </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Leaderboards\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,16 @@
+@if (IsLoading)
+{
+    <MudStack>
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        @if (!string.IsNullOrEmpty(Text)) 
+        {
+            <MudText Type="@Typo.h6">@Text</MudText>
+        }
+    </MudStack>
+}
+
+@code {
+    [Parameter] public string Text { get; set; } = "";
+
+    [Parameter] public bool IsLoading { get; set; }
+}
