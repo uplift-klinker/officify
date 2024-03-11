@@ -1,9 +1,12 @@
 namespace Officify.Core.Common.Exceptions;
 
-public class EntityNotFoundException<TEntity>(Guid id) : Exception(FormatMessage(id))
+public class EntityNotFoundException(Type type, Guid id) : Exception(FormatMessage(type, id))
 {
-    private static string FormatMessage(Guid id)
+    private static string FormatMessage(Type type, Guid id)
     {
-        return $"Could not find {typeof(TEntity).Name} with id {id}";
+        return $"Could not find {type.Name} with id {id}";
     }
 }
+
+public class EntityNotFoundException<TEntity>(Guid id)
+    : EntityNotFoundException(typeof(TEntity), id);
