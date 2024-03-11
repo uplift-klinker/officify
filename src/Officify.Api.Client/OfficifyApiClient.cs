@@ -28,13 +28,13 @@ public class OfficifyApiClient(
         return await GetAsync<LeaderboardModel>(route).ConfigureAwait(false);
     }
 
-    public async Task<CompetitionModel> CreateCompetition(CreateCompetitionModel model)
+    public async Task<CompetitionModel> CreateCompetitionAsync(CreateCompetitionModel model)
     {
         return await PostAsync<CreateCompetitionModel, CompetitionModel>("/competitions", model)
             .ConfigureAwait(false);
     }
 
-    public async Task<CompetitionResultModel> CreateCompetitionResult(
+    public async Task<CompetitionResultModel> CreateCompetitionResultAsync(
         CreateCompetitionResultModel model
     )
     {
@@ -43,13 +43,19 @@ public class OfficifyApiClient(
             .ConfigureAwait(false);
     }
 
-    public async Task<CompetitorModel> GetCompetitorById(Guid id)
+    public async Task<CompetitorModel> CreateCompetitorAsync(CreateCompetitorModel model)
+    {
+        return await PostAsync<CreateCompetitorModel, CompetitorModel>("/competitors", model)
+            .ConfigureAwait(false);
+    }
+
+    public async Task<CompetitorModel> GetCompetitorByIdAsync(Guid id)
     {
         var route = $"/competitors/{id}";
         return await GetAsync<CompetitorModel>(route).ConfigureAwait(false);
     }
 
-    public async Task<CompetitorModel> GetCompetitorByUserId(string userId)
+    public async Task<CompetitorModel> GetCompetitorByUserIdAsync(string userId)
     {
         var route = $"/competitors/{userId}";
         return await GetAsync<CompetitorModel>(route).ConfigureAwait(false);
