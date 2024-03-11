@@ -1,11 +1,12 @@
-﻿@inherits LayoutComponentBase
+﻿@using MudBlazor.Utilities
+@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider Theme="@Theme" @ref="@ThemeProvider" @bind-IsDarkMode="@IsDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <AppBar OnToggleDrawer="@HandleToggleDrawer"/>
+    <AppBar OnToggleDrawer="@HandleToggleDrawer" OnToggleDarkMode="@HandleToggleDarkMode" IsDarkMode="@IsDarkMode"/>
     <AppDrawer IsOpen="@IsDrawerOpen" />
     <MainContent>
         @Body
@@ -13,11 +14,45 @@
 </MudLayout>
 
 @code {
+    private MudThemeProvider ThemeProvider { get; set; } = new();
+
+    private MudTheme Theme { get; set; } = new MudTheme
+    {
+        Palette = new PaletteLight
+        {
+            Primary = Colors.Blue.Default,
+            Secondary = Colors.Yellow.Default,
+            AppbarBackground = Colors.Blue.Default
+        },
+        PaletteDark = new PaletteDark
+        {
+            Primary = Colors.Blue.Darken1,
+            Secondary = Colors.Yellow.Darken1,
+            AppbarBackground = Colors.Blue.Darken1
+        }
+    };
     private bool IsDrawerOpen { get; set; }
+    private bool IsDarkMode { get; set; }
     
     private void HandleToggleDrawer()
     {
         IsDrawerOpen = !IsDrawerOpen;
+        StateHasChanged();
+    }
+
+    private void HandleToggleDarkMode()
+    {
+        IsDarkMode = !IsDarkMode;
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        IsDarkMode = await ThemeProvider.GetSystemPreference();
+        StateHasChanged();
     }
 
 }

@@ -1,7 +1,8 @@
-
-<NavLink href="@Route">
-    @Text
-</NavLink>
+<MudNavLink Href="@Route" >
+    <MudPaper Outlined="true" Elevation="3" Height="10rem" Width="100%">
+        <MudText Type="@Typo.h3">@Text</MudText>
+    </MudPaper>
+</MudNavLink>
 
 @code {
     [Parameter] public string? Route { get; set; }

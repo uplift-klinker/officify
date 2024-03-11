@@ -1,4 +1,8 @@
 @page "/home"
 @using Officify.Web.Host.Home
 
-<HomeLinkButton Route="leaderboards" Text="Leaderboards" />
+<MudGrid Spacing="4">
+    <MudItem xs="3" >
+        <HomeLinkButton Route="leaderboards" Text="Leaderboards" />        
+    </MudItem>
+</MudGrid>
