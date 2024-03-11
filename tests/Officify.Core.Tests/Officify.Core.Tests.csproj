@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Officify.Core\Officify.Core.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Support\" />
+    <ProjectReference Include="..\..\src\Officify.Core\Officify.Core.csproj" />
   </ItemGroup>
 </Project>
