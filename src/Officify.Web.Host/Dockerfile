@@ -14,6 +14,7 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 COPY ["Directory.Build.props", "src/"]
+COPY ["src/Officify.Api.Client/Officify.Api.Client.csproj", "src/Officify.Api.Client/"]
 COPY ["src/Officify.Web.Host/Officify.Web.Host.csproj", "src/Officify.Web.Host/"]
 COPY ["src/Officify.Models/Officify.Models.csproj", "src/Officify.Models/"]
 RUN dotnet restore "src/Officify.Web.Host/Officify.Web.Host.csproj"
