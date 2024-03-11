@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
 using Officify.Models;
 using Officify.Models.Competitions;
+using Officify.Models.Competitors;
 using LeaderboardItemModel = Officify.Models.Leaderboard.LeaderboardItemModel;
 
 namespace Officify.Api.Client;
@@ -29,7 +30,8 @@ public class OfficifyApiClient(
 
     public async Task<CompetitionModel> CreateCompetition(CreateCompetitionModel model)
     {
-        return await PostAsync<CreateCompetitionModel, CompetitionModel>("/competitions", model);
+        return await PostAsync<CreateCompetitionModel, CompetitionModel>("/competitions", model)
+            .ConfigureAwait(false);
     }
 
     public async Task<CompetitionResultModel> CreateCompetitionResult(
@@ -37,7 +39,20 @@ public class OfficifyApiClient(
     )
     {
         var route = $"/competitions/{model.CompetitionId}/results";
-        return await PostAsync<CreateCompetitionResultModel, CompetitionResultModel>(route, model);
+        return await PostAsync<CreateCompetitionResultModel, CompetitionResultModel>(route, model)
+            .ConfigureAwait(false);
+    }
+
+    public async Task<CompetitorModel> GetCompetitorById(Guid id)
+    {
+        var route = $"/competitors/{id}";
+        return await GetAsync<CompetitorModel>(route).ConfigureAwait(false);
+    }
+
+    public async Task<CompetitorModel> GetCompetitorByUserId(string userId)
+    {
+        var route = $"/competitors/{userId}";
+        return await GetAsync<CompetitorModel>(route).ConfigureAwait(false);
     }
 
     public async Task<ListResult<LeaderboardItemModel>> GetLeaderBoardsAsync()
