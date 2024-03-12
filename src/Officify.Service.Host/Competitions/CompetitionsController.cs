@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Functions.Worker;
 using Officify.Core.Common;
 using Officify.Core.Competitions.Commands;
 using Officify.Core.Competitions.Queries;
@@ -7,39 +9,52 @@ using Officify.Service.Host.Common;
 
 namespace Officify.Service.Host.Competitions;
 
-[Route("competitions")]
 public class CompetitionsController(IMessageBus messageBus) : MessageBusController(messageBus)
 {
-    [HttpGet("")]
-    public async Task<IActionResult> GetAll()
+    [Function("GetAllCompetitions")]
+    public async Task<IActionResult> GetAll(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "competitions")]
+            HttpRequest request
+    )
     {
         return await ExecuteAsync(new GetAllCompetitionsQuery()).ConfigureAwait(false);
     }
 
-    [HttpGet("{id:guid}/leaderboard")]
+    [Function("GetCompetitionLeaderboard")]
     public async Task<IActionResult> GetLeaderboard(
-        [FromRoute] Guid id,
-        [FromQuery] int pageSize = PagingDefaults.PageSize,
-        [FromQuery] int pageNumber = PagingDefaults.PageNumber
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "competitions/{id:guid}/leaderboard")]
+            HttpRequest request,
+        Guid id
     )
     {
+        var pageSize = request.GetIntQueryValueOrDefault("pageSize", 10);
+        var pageNumber = request.GetIntQueryValueOrDefault("pageNumber", 1);
         return await ExecuteAsync(new GetLeaderboardForCompetitionQuery(id, pageSize, pageNumber))
             .ConfigureAwait(false);
     }
 
-    [HttpPost("")]
-    public async Task<IActionResult> CreateCompetition([FromBody] CreateCompetitionModel model)
+    [Function("CreateCompetition")]
+    public async Task<IActionResult> CreateCompetition(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", "competitions")] HttpRequest request
+    )
     {
+        var model = await request.ReadContentAsJsonOrThrowAsync<CreateCompetitionModel>();
         return await ExecuteAsync(new CreateCompetitionCommand(model.Name, model.RankType))
             .ConfigureAwait(false);
     }
 
-    [HttpPost("{competitionId:guid}/results")]
+    [Function("CreateCompetitionResult")]
     public async Task<IActionResult> CreateCompetitionResult(
-        [FromRoute] Guid competitionId,
-        [FromBody] CreateCompetitionResultModel model
+        [HttpTrigger(
+            AuthorizationLevel.Anonymous,
+            "post",
+            "competitions/{competitionId:guid}/results"
+        )]
+            HttpRequest request,
+        Guid competitionId
     )
     {
+        var model = await request.ReadContentAsJsonOrThrowAsync<CreateCompetitionResultModel>();
         var command = new CreateCompetitionResultCommand(
             competitionId,
             model.CompetitorId,

@@ -6,8 +6,7 @@ using Officify.Core.Common.Queries;
 
 namespace Officify.Service.Host.Common;
 
-[ApiController]
-public class MessageBusController(IMessageBus messageBus) : Controller
+public class MessageBusController(IMessageBus messageBus)
 {
     protected async Task<IActionResult> ExecuteAsync<TResult>(
         ICommand<TResult> command,
@@ -19,11 +18,11 @@ public class MessageBusController(IMessageBus messageBus) : Controller
             var result = await messageBus
                 .ExecuteAsync(command, cancellationToken)
                 .ConfigureAwait(false);
-            return Json(result);
+            return new JsonResult(result);
         }
         catch (EntityNotFoundException e)
         {
-            return NotFound();
+            return new NotFoundResult();
         }
     }
 
@@ -37,11 +36,11 @@ public class MessageBusController(IMessageBus messageBus) : Controller
             var result = await messageBus
                 .ExecuteAsync(query, cancellationToken)
                 .ConfigureAwait(false);
-            return result == null ? NotFound() : Json(result);
+            return result == null ? new NotFoundResult() : new JsonResult(result);
         }
         catch (EntityNotFoundException e)
         {
-            return NotFound();
+            return new NotFoundResult();
         }
     }
 }

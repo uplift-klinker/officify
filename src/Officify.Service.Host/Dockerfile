@@ -14,8 +14,14 @@ RUN dotnet build "src/Officify.Service.Host/Officify.Service.Host.csproj" -c $BU
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "src/Officify.Service.Host/Officify.Service.Host.csproj" -c $BUILD_CONFIGURATION -o /app/publish -r linux-arm64 /p:UseAppHost=false
+RUN dotnet publish "src/Officify.Service.Host/Officify.Service.Host.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-FROM mcr.microsoft.com/azure-functions/dotnet:4.0 AS final
+FROM mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated8.0 AS final
+
+ENV AzureWebJobsScriptRoot="/app"
+ENV AzureFunctionsJobHost__Logging__Console__IsEnabled="true"
+ENV AzureWebJobsStorage="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;QueueEndpoint=http://azurite:10001/devstoreaccount1;TableEndpoint=http://azurite:10002/devstoreaccount1;"
+ENV FUNCTIONS_WORKER_RUNTIME="dotnet-isolated"
+
 WORKDIR /app
-COPY --from=publish ["/app/publish", "/home/site/wwwroot"]
+COPY --from=publish ["/app/publish", "/app"]

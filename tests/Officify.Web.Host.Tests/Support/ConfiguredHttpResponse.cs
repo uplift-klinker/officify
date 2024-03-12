@@ -2,8 +2,8 @@ namespace Officify.Web.Host.Tests.Support;
 
 public record ConfiguredHttpResponse(
     HttpMethod Method,
-    string Url,
-    HttpResponseMessage Response,
+    Uri Url,
+    ConfiguredHttpResponseMessage Response,
     Func<byte[], Task<bool>>? Matcher = null,
     int DelayMilliseconds = 0
 )
@@ -12,7 +12,7 @@ public record ConfiguredHttpResponse(
 
     public async Task<HttpResponseMessage?> GetResponse(
         HttpMethod requestMethod,
-        string requestUrl,
+        Uri requestUrl,
         byte[] content
     )
     {
@@ -20,11 +20,11 @@ public record ConfiguredHttpResponse(
         if (Method != requestMethod)
             return null;
 
-        if (Url != requestUrl)
+        if (Url.LocalPath != requestUrl.LocalPath)
             return null;
 
         if (await TryMatchContent(content))
-            return Response;
+            return Response.ToHttpResponseMessage();
 
         return null;
     }

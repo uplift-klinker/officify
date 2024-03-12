@@ -22,25 +22,28 @@ public class FakeHttpMessageHandler : HttpMessageHandler
         _configuredResponses.Add(response);
     }
 
-    public void SetupGetResponse(
+    public async Task SetupGetResponse(
         string url,
         HttpResponseMessage response,
         int delayMilliseconds = 0
     )
     {
+        var configuredResponse = await ConfiguredHttpResponseMessage.FromHttpResponseMessage(
+            response
+        );
         SetupResponse(
             new ConfiguredHttpResponse(
                 HttpMethod.Get,
-                url,
-                response,
+                new Uri(url),
+                configuredResponse,
                 DelayMilliseconds: delayMilliseconds
             )
         );
     }
 
-    public void SetupGetJsonResponse<T>(string url, T value, int delayMilliseconds = 0)
+    public async Task SetupGetJsonResponse<T>(string url, T value, int delayMilliseconds = 0)
     {
-        SetupGetResponse(
+        await SetupGetResponse(
             url,
             new HttpResponseMessage(HttpStatusCode.OK) { Content = JsonContent.Create(value) },
             delayMilliseconds
@@ -57,7 +60,7 @@ public class FakeHttpMessageHandler : HttpMessageHandler
                 ? Array.Empty<byte>()
                 : await request.Content.ReadAsByteArrayAsync(cancellationToken);
 
-        var url = request.RequestUri == null ? "" : request.RequestUri.ToString();
+        var url = request.RequestUri == null ? new UriBuilder().Uri : request.RequestUri;
 
         foreach (var response in _configuredResponses)
         {

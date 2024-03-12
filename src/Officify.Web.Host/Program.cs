@@ -8,7 +8,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddOfficifyWebHost(api =>
 {
-    api.BaseUrl = "http://localhost:5000";
+    api.BaseUrl = "http://localhost:5002";
 });
 
 await builder.Build().RunAsync();

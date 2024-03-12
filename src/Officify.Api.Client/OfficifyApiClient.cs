@@ -61,12 +61,6 @@ public class OfficifyApiClient(
         return await GetAsync<CompetitorModel>(route).ConfigureAwait(false);
     }
 
-    public async Task<ListResult<LeaderboardItemModel>> GetLeaderBoardsAsync()
-    {
-        return await GetAsync<ListResult<LeaderboardItemModel>>("/leaderboards")
-            .ConfigureAwait(false);
-    }
-
     private async Task<T> GetAsync<T>(string route)
     {
         var uri = GetFullUrl(route);

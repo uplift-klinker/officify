@@ -1,0 +1,51 @@
+@using Officify.Models.Competitions
+@inject OfficifyApiClient Api;
+
+<MudTable Items="@(Model?.Items ?? Array.Empty<LeaderboardItemModel>())" Loading="@IsLoading">
+    <HeaderContent>
+        <MudTh>Rank</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Value</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTr role="listitem">
+            <MudTd DataLabel="Rank">@context.Rank</MudTd>
+            <MudTd DataLabel="Name">@context.CompetitorCodename</MudTd>
+            <MudTd DataLabel="Value">@context.Result</MudTd>
+        </MudTr>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    [Parameter]
+    public Guid CompetitionId { get; set; }
+
+    private LeaderboardModel? Model { get; set; }
+
+    private bool IsLoading { get; set; }
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadLeaderboard(CompetitionId);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadLeaderboard(CompetitionId);
+    }
+
+    private async Task LoadLeaderboard(Guid competitionId)
+    {
+        if (competitionId == Guid.Empty)
+        {
+            return;
+        }
+        
+        IsLoading = true;
+        StateHasChanged();
+
+        Model = await Api.GetLeaderboardAsync(new GetLeaderboardModel(CompetitionId, 10, 1));
+        IsLoading = false;
+        StateHasChanged();
+    }
+}
