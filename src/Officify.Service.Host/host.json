@@ -13,5 +13,8 @@
         "http": {
             "routePrefix": ""
         }
+    },
+    "tracing": {
+        "consoleLevel": "verbose"
     }
 }

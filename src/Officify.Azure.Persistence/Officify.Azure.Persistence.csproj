@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.2" />
+    <PackageReference Include="Azure.Data.Tables" Version="12.8.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Officify.Core\Officify.Core.csproj" />
+  </ItemGroup>
+
+</Project>
