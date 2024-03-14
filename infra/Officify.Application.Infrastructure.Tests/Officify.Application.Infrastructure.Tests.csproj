@@ -1,3 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    
+  <ItemGroup>
+    <ProjectReference Include="..\Officify.Application.Infrastructure\Officify.Application.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

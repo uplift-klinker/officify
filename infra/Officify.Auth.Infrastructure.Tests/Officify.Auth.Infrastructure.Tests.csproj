@@ -1,3 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  <ItemGroup>
+    <ProjectReference Include="..\Officify.Auth.Infrastructure\Officify.Auth.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

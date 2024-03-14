@@ -6,6 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Pulumi" Version="3.60.0" />
+    <PackageReference Include="Pulumi.AzureAD" Version="5.47.2" />
+    <PackageReference Include="Pulumi.Auth0" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Officify.Core.Infrastructure\Officify.Core.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
