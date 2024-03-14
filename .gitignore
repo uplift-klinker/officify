@@ -6,3 +6,4 @@ node_modules/
 tools/Addins/
 **/*.user
 *.user
+**/.envrc
