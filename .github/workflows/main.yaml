@@ -20,9 +20,8 @@ jobs:
         with:
           global-json-file: global.json
           
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
+      - name: Install Required Software
+        run: ${{ github.workspace }}/install-ubuntu-software.sh
 
       - run: dotnet tool restore
         name: Restore Dotnet Tools
@@ -30,4 +29,6 @@ jobs:
       - run: dotnet restore --locked-mode
         name: Restore Packages
       
-      - run: dotnet cake
+      - name: Run Verify
+        run: ${{ github.workspace }}/src/Officify.Build.Host/build.sh
+        working-directory: ${{ github.workspace }}

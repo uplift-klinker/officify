@@ -17,12 +17,16 @@ public class CompetitionsController(IMessageBus messageBus) : MessageBusControll
             HttpRequest request
     )
     {
-        return await ExecuteAsync(new GetAllCompetitionsQuery()).ConfigureAwait(false);
+        return await ExecuteAsync(new GetAllCompetitionsQuery());
     }
 
     [Function("GetCompetitionLeaderboard")]
     public async Task<IActionResult> GetLeaderboard(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "competitions/{id:guid}/leaderboard")]
+        [HttpTrigger(
+            AuthorizationLevel.Anonymous,
+            "get",
+            Route = "competitions/{id:guid}/leaderboard"
+        )]
             HttpRequest request,
         Guid id
     )
@@ -35,7 +39,8 @@ public class CompetitionsController(IMessageBus messageBus) : MessageBusControll
 
     [Function("CreateCompetition")]
     public async Task<IActionResult> CreateCompetition(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", "competitions")] HttpRequest request
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "competitions")]
+            HttpRequest request
     )
     {
         var model = await request.ReadContentAsJsonOrThrowAsync<CreateCompetitionModel>();
@@ -48,7 +53,7 @@ public class CompetitionsController(IMessageBus messageBus) : MessageBusControll
         [HttpTrigger(
             AuthorizationLevel.Anonymous,
             "post",
-            "competitions/{competitionId:guid}/results"
+            Route = "competitions/{competitionId:guid}/results"
         )]
             HttpRequest request,
         Guid competitionId

@@ -13,7 +13,7 @@ public class CompetitorsController(IMessageBus messageBus) : MessageBusControlle
 {
     [Function("GetCompetitorById")]
     public async Task<IActionResult> GetCompetitorById(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "competitors/{id:guid}")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "competitors/{id:guid}")]
             HttpRequest request,
         Guid id
     )
@@ -23,7 +23,7 @@ public class CompetitorsController(IMessageBus messageBus) : MessageBusControlle
 
     [Function("GetCompetitorByUserId")]
     public async Task<IActionResult> GetCompetitorByIdOrUserId(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", "competitors/{userId}")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "competitors/{userId}")]
             HttpRequest request,
         string userId
     )
@@ -33,7 +33,8 @@ public class CompetitorsController(IMessageBus messageBus) : MessageBusControlle
 
     [Function("CreateCompetitor")]
     public async Task<IActionResult> CreateCompetitor(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", "competitors")] HttpRequest request
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "competitors")]
+            HttpRequest request
     )
     {
         var model = await request.ReadContentAsJsonOrThrowAsync<CreateCompetitorModel>();
