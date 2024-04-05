@@ -11,7 +11,7 @@ public static class PulumiTesting
     {
         return Deployment.TestAsync<T>(
             new PulumiMocks(),
-            new TestOptions { StackName = stackName }
+            new TestOptions { StackName = stackName, IsPreview = false }
         );
     }
 }

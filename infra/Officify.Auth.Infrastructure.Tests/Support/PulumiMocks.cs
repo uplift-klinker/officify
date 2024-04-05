@@ -16,6 +16,6 @@ public class PulumiMocks : IMocks
 
     public Task<object> CallAsync(MockCallArgs args)
     {
-        throw new NotImplementedException();
+        return Task.FromResult<object>(args);
     }
 }

@@ -14,4 +14,9 @@ public static class PulumiOutputExtensions
         });
         return completionSource.Task;
     }
+
+    public static PulumiOutputAssertions<T> Should<T>(this Output<T> output)
+    {
+        return new PulumiOutputAssertions<T>(output);
+    }
 }
