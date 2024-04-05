@@ -12,7 +12,9 @@
 ```bash
 # Ensure you are at the root of the solution
 
-dotnet cake --target "StartApp" # Builds & Starts the application using docker compose
+./run-build.sh --target "StartApp" # Builds & Starts the application using docker compose
 
-dotnet cake # Runs default cake target
+./run-build.sh --target "StopApp" # Stops the running application
+
+./run-build.sh # Runs default cake target
 ```
