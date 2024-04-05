@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using Pulumi.Testing;
 
-namespace Officify.Auth.Infrastructure.Tests.Support;
+namespace Officify.Infrastructure.Testing.Support;
 
 public class PulumiMocks : IMocks
 {

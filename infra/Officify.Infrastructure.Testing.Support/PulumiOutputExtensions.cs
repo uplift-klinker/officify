@@ -1,6 +1,6 @@
 using Pulumi;
 
-namespace Officify.Auth.Infrastructure.Tests.Support;
+namespace Officify.Infrastructure.Testing.Support;
 
 public static class PulumiOutputExtensions
 {

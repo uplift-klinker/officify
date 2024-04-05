@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using Pulumi;
 using Pulumi.Testing;
 
-namespace Officify.Auth.Infrastructure.Tests.Support;
+namespace Officify.Infrastructure.Testing.Support;
 
 public static class PulumiTesting
 {

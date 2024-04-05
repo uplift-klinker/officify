@@ -1,4 +1,3 @@
-using Officify.Auth.Infrastructure.Tests.Support;
 using Pulumi.Auth0;
 using Pulumi.Random;
 

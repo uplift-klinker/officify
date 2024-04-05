@@ -77,6 +77,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Persistence.Infras
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Core.Infrastructure", "infra\Officify.Core.Infrastructure\Officify.Core.Infrastructure.csproj", "{A3E866C1-7902-4BD0-AA6E-BF82095A1BD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infrastructure.Testing.Support", "infra\Officify.Infrastructure.Testing.Support\Officify.Infrastructure.Testing.Support.csproj", "{B243B0B0-DB95-4D48-B0CE-22D47086B77E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,10 @@ Global
 		{A3E866C1-7902-4BD0-AA6E-BF82095A1BD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E866C1-7902-4BD0-AA6E-BF82095A1BD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E866C1-7902-4BD0-AA6E-BF82095A1BD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B243B0B0-DB95-4D48-B0CE-22D47086B77E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B243B0B0-DB95-4D48-B0CE-22D47086B77E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B243B0B0-DB95-4D48-B0CE-22D47086B77E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B243B0B0-DB95-4D48-B0CE-22D47086B77E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D9367A47-F910-48D8-8863-430348E9ABE1} = {9D318D41-A842-4D8A-80BE-37BF6EE137CB}
@@ -174,5 +180,6 @@ Global
 		{F50C9B93-CB91-479A-85E7-C9D4C9600445} = {8EB59145-CB14-48A6-B028-30A477287EA6}
 		{B4EE2E84-83CA-49B1-9DA6-0F8FDC687BE1} = {8EB59145-CB14-48A6-B028-30A477287EA6}
 		{A3E866C1-7902-4BD0-AA6E-BF82095A1BD0} = {8EB59145-CB14-48A6-B028-30A477287EA6}
+		{B243B0B0-DB95-4D48-B0CE-22D47086B77E} = {8EB59145-CB14-48A6-B028-30A477287EA6}
 	EndGlobalSection
 EndGlobal

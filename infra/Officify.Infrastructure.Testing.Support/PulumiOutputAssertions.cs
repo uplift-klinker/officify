@@ -1,7 +1,7 @@
 using FluentAssertions.Primitives;
 using Pulumi;
 
-namespace Officify.Auth.Infrastructure.Tests.Support;
+namespace Officify.Infrastructure.Testing.Support;
 
 public class PulumiOutputAssertions<T>(Output<T> subject)
     : ReferenceTypeAssertions<Output<T>, PulumiOutputAssertions<T>>(subject)
