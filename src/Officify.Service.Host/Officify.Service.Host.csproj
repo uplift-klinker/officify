@@ -32,10 +32,4 @@
     <ProjectReference Include="..\Officify.Core\Officify.Core.csproj" />
     <ProjectReference Include="..\Officify.Azure.Persistence\Officify.Azure.Persistence.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Content Include="..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
 </Project>

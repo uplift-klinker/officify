@@ -9,6 +9,7 @@ using Officify.Build.Host.Contexts;
 namespace Officify.Build.Host.Tasks;
 
 [TaskName("StartApp")]
+[IsDependentOn(typeof(GenerateLocalFunctionSettingsTask))]
 public class StartAppTask : FrostingTask<OfficifyBuildContext>
 {
     public override void Run(OfficifyBuildContext context)

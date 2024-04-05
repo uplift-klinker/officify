@@ -11,6 +11,8 @@ public class OfficifyBuildContext(ICakeContext context) : FrostingContext(contex
         Path.Join(context.Environment.WorkingDirectory.FullPath, "..", "..");
     public string SolutionPath => Path.Join(RepositoryRoot, "Officify.sln");
     public string ServiceHostDirectory => Path.Join(RepositoryRoot, "src", "Officify.Service.Host");
+    public string ServiceHostLocalSettingsFilePath =>
+        Path.Join(ServiceHostDirectory, "local.settings.json");
     public string WebHostDirectory => Path.Join(RepositoryRoot, "src", "Officify.Web.Host");
     public int SignalREmulatorPort => 8888;
     public int ServiceHostPort => 5002;
