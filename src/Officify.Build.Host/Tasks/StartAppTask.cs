@@ -36,6 +36,7 @@ public class StartAppTask : FrostingTask<OfficifyBuildContext>
                 WorkingDirectory = context.ServiceHostDirectory,
                 Arguments = new ProcessArgumentBuilder()
                     .Append("start")
+                    .Append("--verbose")
                     .Append($"--port {context.ServiceHostPort}")
             }
         );

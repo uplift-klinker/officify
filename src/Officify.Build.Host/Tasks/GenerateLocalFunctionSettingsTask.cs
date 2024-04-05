@@ -10,20 +10,29 @@ public class GenerateLocalFunctionSettingsTask : AsyncFrostingTask<OfficifyBuild
 {
     private const string AzuriteStorageConnectionString =
         "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;";
+
     private const string WorkerRuntime = "dotnet-isolated";
     private const string EntitiesTableName = "OfficifyEntities";
 
     public override async Task RunAsync(OfficifyBuildContext context)
     {
-        if (File.Exists(context.ServiceHostLocalSettingsFilePath))
+        var projectLocalSettings = Path.Join(context.ServiceHostDirectory, "local.settings.json");
+        await EnsureSettingsFileExists(projectLocalSettings, context);
+    }
+
+    private static async Task EnsureSettingsFileExists(
+        string filePath,
+        OfficifyBuildContext context
+    )
+    {
+        if (File.Exists(filePath))
         {
-            context.Information("Local settings file exists skipping generating one");
+            context.Information("Local settings file exists {0}", filePath);
             return;
         }
 
-        context.Information("Generating local settings file");
-        var settings = GenerateLocalSettingsJson();
-        await File.WriteAllTextAsync(context.ServiceHostLocalSettingsFilePath, settings);
+        context.Information("Generating local settings file {0}", filePath);
+        await File.WriteAllTextAsync(filePath, GenerateLocalSettingsJson());
     }
 
     private static string GenerateLocalSettingsJson()
