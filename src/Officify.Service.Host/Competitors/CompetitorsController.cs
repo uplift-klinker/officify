@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
-using Officify.Core.Common;
+using Microsoft.Azure.Functions.Worker.Http;
 using Officify.Core.Competitors.Commands;
 using Officify.Core.Competitors.Queries;
 using Officify.Models.Competitors;
@@ -9,36 +7,43 @@ using Officify.Service.Host.Common;
 
 namespace Officify.Service.Host.Competitors;
 
-public class CompetitorsController(IMessageBus messageBus) : MessageBusController(messageBus)
+public class CompetitorsController(ResponseDataBuilder responseBuilder)
 {
     [Function("GetCompetitorById")]
-    public async Task<IActionResult> GetCompetitorById(
+    public async Task<HttpResponseData> GetCompetitorById(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "competitors/{id:guid}")]
-            HttpRequest request,
-        Guid id
+            HttpRequestData request,
+        Guid id,
+        CancellationToken cancellationToken = default
     )
     {
-        return await ExecuteAsync(new GetCompetitorByIdQuery(id)).ConfigureAwait(false);
+        var query = new GetCompetitorByIdQuery(id);
+        return await responseBuilder.UseRequest(request).ExecuteAsync(query, cancellationToken);
     }
 
     [Function("GetCompetitorByUserId")]
-    public async Task<IActionResult> GetCompetitorByIdOrUserId(
+    public async Task<HttpResponseData> GetCompetitorByIdOrUserId(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "competitors/{userId}")]
-            HttpRequest request,
-        string userId
+            HttpRequestData request,
+        string userId,
+        CancellationToken cancellationToken = default
     )
     {
-        return await ExecuteAsync(new GetCompetitorByUserIdQuery(userId)).ConfigureAwait(false);
+        var query = new GetCompetitorByUserIdQuery(userId);
+        return await responseBuilder.UseRequest(request).ExecuteAsync(query, cancellationToken);
     }
 
     [Function("CreateCompetitor")]
-    public async Task<IActionResult> CreateCompetitor(
+    public async Task<HttpResponseData> CreateCompetitor(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "competitors")]
-            HttpRequest request
+            HttpRequestData request,
+        CancellationToken cancellationToken = default
     )
     {
-        var model = await request.ReadContentAsJsonOrThrowAsync<CreateCompetitorModel>();
-        return await ExecuteAsync(new CreateCompetitorCommand(model.Codename, model.UserId))
-            .ConfigureAwait(false);
+        var model = await request.ReadContentAsJsonOrThrowAsync<CreateCompetitorModel>(
+            cancellationToken
+        );
+        var command = new CreateCompetitorCommand(model.Codename, model.UserId);
+        return await responseBuilder.UseRequest(request).ExecuteAsync(command, cancellationToken);
     }
 }

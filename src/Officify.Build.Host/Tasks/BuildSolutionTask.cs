@@ -13,7 +13,11 @@ public class BuildSolutionTask : FrostingTask<OfficifyBuildContext>
     {
         context.DotNetBuild(
             context.SolutionPath,
-            new DotNetBuildSettings { Configuration = context.BuildConfiguration }
+            new DotNetBuildSettings
+            {
+                Configuration = context.BuildConfiguration,
+                Verbosity = DotNetVerbosity.Minimal
+            }
         );
     }
 }

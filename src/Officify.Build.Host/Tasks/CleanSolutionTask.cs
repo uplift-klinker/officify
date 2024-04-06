@@ -12,7 +12,11 @@ public class CleanSolutionTask : FrostingTask<OfficifyBuildContext>
     {
         context.DotNetClean(
             context.SolutionPath,
-            new DotNetCleanSettings { Configuration = context.BuildConfiguration }
+            new DotNetCleanSettings
+            {
+                Configuration = context.BuildConfiguration,
+                Verbosity = DotNetVerbosity.Minimal
+            }
         );
     }
 }

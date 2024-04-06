@@ -6,9 +6,10 @@ using Microsoft.Extensions.Hosting;
 using Officify.Azure.Persistence;
 using Officify.Core;
 using Officify.Service.Host;
+using Officify.Service.Host.Common;
 
 var host = new HostBuilder()
-    .ConfigureFunctionsWebApplication()
+    .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices(
         (context, services) =>
         {
@@ -36,6 +37,7 @@ var host = new HostBuilder()
             services.ConfigureFunctionsApplicationInsights();
             services
                 .AddOfficifyCore()
+                .AddTransient<ResponseDataBuilder>()
                 .AddOfficifyAzurePersistence(
                     storageAccountConnectionString,
                     opts =>
