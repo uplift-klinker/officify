@@ -1,6 +1,6 @@
 using Pulumi;
 
-namespace Officify.Core.Infrastructure;
+namespace Officify.Infra.Host.Common;
 
 public abstract class OfficifyStackBase : Stack
 {

@@ -1,4 +1,4 @@
-name: Officify.Application.Infrastructure
+name: Officify.Infra.Host
 runtime: dotnet
 description: A minimal C# Pulumi program
 config:

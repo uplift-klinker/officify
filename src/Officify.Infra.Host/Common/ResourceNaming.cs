@@ -1,7 +1,7 @@
 using Humanizer;
 using Pulumi;
 
-namespace Officify.Core.Infrastructure;
+namespace Officify.Infra.Host.Common;
 
 public class ResourceNaming(DeploymentInstance deployment)
 {

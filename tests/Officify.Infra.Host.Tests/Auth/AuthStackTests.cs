@@ -1,7 +1,8 @@
+using Officify.Infra.Host.Auth;
 using Pulumi.Auth0;
 using Pulumi.Random;
 
-namespace Officify.Auth.Infrastructure.Tests;
+namespace Officify.Infra.Host.Tests.Auth;
 
 public class AuthStackTests
 {

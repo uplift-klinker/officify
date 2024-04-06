@@ -1,9 +1,9 @@
-using Officify.Core.Infrastructure;
+using Officify.Infra.Host.Common;
 using Pulumi;
 using Pulumi.Auth0;
 using Pulumi.Random;
 
-namespace Officify.Auth.Infrastructure;
+namespace Officify.Infra.Host.Auth;
 
 public class AuthStack : OfficifyStackBase
 {

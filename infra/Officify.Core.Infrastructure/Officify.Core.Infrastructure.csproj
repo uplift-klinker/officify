@@ -1,6 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-    <ItemGroup>
-        <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-        <PackageReference Include="Pulumi" Version="3.60.0"/>
-    </ItemGroup>
-</Project>
