@@ -25,7 +25,7 @@ on:
 
 name: Deploy ${{ inputs.target-env }}
 jobs: 
-  deploy_persistence:
+  persistence:
     name: Deploy Persistence
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit
@@ -33,24 +33,27 @@ jobs:
       target-env: ${{ inputs.target-env }}
       target-layer: 'persist'
     
-  deploy_auth:
+  auth:
     name: Deploy Auth
+    needs: [persistence]
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit
     with:
       target-env: ${{ inputs.target-env }}
       target-layer: 'auth'
       
-  deploy_api:
+  api:
     name: Deploy Api
+    needs: [auth, persistence]
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit
     with:
       target-env: ${{ inputs.target-env }}
       target-layer: 'api'
 
-  deploy_site:
+  site:
     name: Deploy Site
+    needs: [api]
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit
     with:
