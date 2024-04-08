@@ -12,42 +12,47 @@ on:
         required: true
       auth0-client-domain:
         required: true
+      arm-client-id:
+        required: true
+      arm-client-secret:
+        required: true
+      arm-subscription-id:
+        required: true
+      arm-tenant-id:
+        required: true
+      pulumi-config-passphrase:
+        required: true
 
 name: Deploy ${{ inputs.target-env }}
 jobs: 
-  deploy_env:
-    runs-on: ubuntu-22.04
-    name: Deploy ${{ inputs.target-env }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/deploy_layer.yaml
-        with:
-          target-env: ${{ inputs.target-env }}
-          target-layer: 'persist'
-          auth0-client-id: ${{ inputs.auth0-client-id }}
-          auth0-client-secret: ${{ inputs.auth0-client-secret }}
-          auth0-domain: ${{ inputs.auth0-domain }}
-          
-      - uses: ./.github/workflows/deploy_layer.yaml
-        with:
-          target-env: ${{ inputs.target-env }}
-          target-layer: 'auth'
-          auth0-client-id: ${{ inputs.auth0-client-id }}
-          auth0-client-secret: ${{ inputs.auth0-client-secret }}
-          auth0-domain: ${{ inputs.auth0-domain }}
-          
-      - uses: ./.github/workflows/deploy_layer.yaml
-        with:
-          target-env: ${{ inputs.target-env }}
-          target-layer: 'api'
-          auth0-client-id: ${{ inputs.auth0-client-id }}
-          auth0-client-secret: ${{ inputs.auth0-client-secret }}
-          auth0-domain: ${{ inputs.auth0-domain }}
+  deploy_persistence:
+    name: Deploy Persistence
+    uses: ./.github/workflows/deploy_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'persist'
+    
+  deploy_auth:
+    name: Deploy Auth
+    uses: ./.github/workflows/deploy_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'auth'
+      
+  deploy_api:
+    name: Deploy Api
+    uses: ./.github/workflows/deploy_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'api'
 
-      - uses: ./.github/workflows/deploy_layer.yaml
-        with:
-          target-env: ${{ inputs.target-env }}
-          target-layer: 'site'
-          auth0-client-id: ${{ inputs.auth0-client-id }}
-          auth0-client-secret: ${{ inputs.auth0-client-secret }}
-          auth0-domain: ${{ inputs.auth0-domain }}
+  deploy_site:
+    name: Deploy Site
+    uses: ./.github/workflows/deploy_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'site'

@@ -5,22 +5,20 @@ on:
     workflows: [Main Build]
     types:
       - completed
-env:
-  AUTH0_CLIENT_ID: ${{ secrets.DEV_AUTH0_CLIENT_ID }}
-  AUTH0_CLIENT_SECRET: ${{ secrets.DEV_AUTH0_CLIENT_SECRET }}
-  AUTH0_DOMAIN: ${{ secrets.DEV_AUTH0_DOMAIN }}
-  
+
 jobs:
   deploy_dev:
-    name: Deploy Dev
-    runs-on: ubuntu-22.04
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-      - uses: actions/checkout@v4
-        
-      - uses: uplift-klinker/officify/.github/workflows/deploy_env.yaml@main
-        with:
-          target-env: dev
-          auth0-client-id: ${{ env.AUTH0_CLIENT_ID }}
-          auth0-client-secret: ${{ env.AUTH0_CLIENT_SECRET }}
-          auth0-domain: ${{ env.AUTH0_DOMAIN }}
+    uses: ./.github/workflows/deploy_env.yaml@main
+    with:
+      target-env: dev
+
+    secrets:
+      auth0-client-id: ${{ secrets.DEV_AUTH0_CLIENT_ID }}
+      auth0-client-secret: ${{ secrets.DEV_AUTH0_CLIENT_SECRET }}
+      auth0-domain: ${{ secrets.DEV_AUTH0_DOMAIN }}
+      arm-client-id: ${{ secrets.ARM_CLIENT_ID }}
+      arm-client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm-subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm-tenant-id: ${{ secrets.ARM_TENANT_ID }}
+      pulumi-config-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}

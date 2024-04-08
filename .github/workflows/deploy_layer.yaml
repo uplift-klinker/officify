@@ -15,6 +15,16 @@ on:
         required: true
       auth0-client-domain:
         required: true
+      arm-client-id:
+        required: true
+      arm-client-secret:
+        required: true
+      arm-subscription-id:
+        required: true
+      arm-tenant-id:
+        required: true
+      pulumi-config-passphrase:
+        required: true
 
 name: Deploy ${{ inputs.target-env }} ${{ inputs.layer-name }}
 jobs:
@@ -29,12 +39,12 @@ jobs:
       AUTH0_CLIENT_SECRET: ${{ inputs.auth0-client-secret }}
       AUTH0_DOMAIN: ${{ inputs.auth0-domain }}
 
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_CLIENT_ID: ${{ inputs.arm-client-id }}
+      ARM_CLIENT_SECRET: ${{ inputs.arm-client-secret }}
+      ARM_SUBSCRIPTION_ID: ${{ inputs.arm-subscription-id }}
+      ARM_TENANT_ID: ${{ inputs.arm-tenant-id }}
 
-      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+      PULUMI_CONFIG_PASSPHRASE: ${{ inputs.pulumi-passphrase }}
 
       INFRA_PROJECT_PATH: ${{ github.workspace }}/src/Officify.Infra.Host
       INFRA_STATE_CONTAINER_NAME: 'officify-infra'
