@@ -10,8 +10,8 @@ public class PersistenceStack : OfficifyStackBase
 {
     public const string LayerName = "persist";
 
-    [Output("site-storage-account-name")]
-    public Output<string> SiteStorageAccountName { get; set; }
+    [Output("web-app-storage-account-name")]
+    public Output<string> WebAppStorageAccountName { get; set; }
 
     [Output("backend-storage-account-name")]
     public Output<string> BackendStorageAccountName { get; set; }
@@ -24,11 +24,11 @@ public class PersistenceStack : OfficifyStackBase
             new ResourceGroupArgs { ResourceGroupName = Naming.ResourceGroupName }
         );
 
-        var siteStorageAccount = new StorageAccount(
-            "site-storage",
-            CreateStorageAccountArgs(resourceGroup, Naming.SiteStorageAccountName, true)
+        var webAppStorage = new StorageAccount(
+            "web-app-storage",
+            CreateStorageAccountArgs(resourceGroup, Naming.WebAppStorageAccountName, true)
         );
-        SiteStorageAccountName = siteStorageAccount.Name;
+        WebAppStorageAccountName = webAppStorage.Name;
 
         var backendStorageAccount = new StorageAccount(
             "backend-storage",

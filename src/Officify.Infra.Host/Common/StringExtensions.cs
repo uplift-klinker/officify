@@ -41,4 +41,12 @@ public static class StringExtensions
                 )
         };
     }
+
+    public static bool EqualsIgnoreCase(this string? actual, string? expected)
+    {
+        if (actual == null)
+            return expected == null;
+
+        return actual.Equals(expected, StringComparison.OrdinalIgnoreCase);
+    }
 }

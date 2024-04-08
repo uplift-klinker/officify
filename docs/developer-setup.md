@@ -6,6 +6,7 @@
 - [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos?view=powershell-7.4)
   - Needed for Playwright Tests
 - [Docker](https://www.docker.com/products/docker-desktop/)
+- [Pulumi](https://www.pulumi.com/docs/install/)
 
 # Using Cake 
 

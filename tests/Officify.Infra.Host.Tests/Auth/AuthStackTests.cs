@@ -28,8 +28,32 @@ public class AuthStackTests
         );
         clients.Should().HaveCount(1);
 
-        await clients[0].Name.Should().HaveValueAsync("Officify Dev Web");
+        var webClient = clients[0];
+        await webClient.Name.Should().HaveValueAsync("Officify Dev Web App");
+
+        var callbacks = await webClient.Callbacks.GetValueAsync();
+        callbacks.Should().Contain("https://stdevofficifypersistwa.z14.web.core.windows.net/");
+        callbacks.Should().Contain("http://localhost:5001/");
+        callbacks.Should().Contain("https://localhost:5003/");
     }
+
+    [Fact]
+    public async Task WhenAuthStackIsDeployedToDevThenAddsLocalhostCallbackUrls()
+    {
+        var clients = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, Client>(
+            AuthStack.LayerName,
+            "prod"
+        );
+        clients.Should().HaveCount(1);
+
+        var webClient = clients[0];
+        var callbacks = await webClient.Callbacks.GetValueAsync();
+        callbacks.Should().HaveCount(1);
+        callbacks.Should().Contain("https://stprodofficifypersistwa.z14.web.core.windows.net/");
+    }
+
+    [Fact]
+    public async Task WhenAuthStackIsDeployedToProdThenOnlyAddsSiteCallbackUrls() { }
 
     [Fact]
     public async Task WhenAuthStackIsDeployedThenCreatesWebAppClientCredentials()
@@ -79,8 +103,8 @@ public class AuthStackTests
 
         var stack = stacks.Single();
         stack.TestUserEmail.Should().NotBeNull();
-        stack.WebClientId.Should().NotBeNull();
-        stack.WebClientSecret.Should().NotBeNull();
+        stack.WebAppClientId.Should().NotBeNull();
+        stack.WebAppClientSecret.Should().NotBeNull();
         stack.TestUserPassword.Should().NotBeNull();
         stack.ApiAudience.Should().NotBeNull();
     }

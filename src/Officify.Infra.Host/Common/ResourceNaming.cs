@@ -1,4 +1,5 @@
 using Humanizer;
+using Officify.Infra.Host.Persistence;
 using Pulumi;
 
 namespace Officify.Infra.Host.Common;
@@ -11,13 +12,15 @@ public class ResourceNaming(DeploymentInstance deployment)
     public string ApplicationName => "officify";
 
     public string ApiAudienceIdentifier => $"https://{EnvironmentName}.{ApplicationName}.api.com";
-    public string WebAppAuthClientName => $"{ApplicationName} {EnvironmentName} Web".Titleize();
+    public string WebAppAuthClientName => $"{ApplicationName} {EnvironmentName} Web App".Titleize();
     public string AuthTenantName => $"p3-uplift-auth-{EnvironmentName}".ToLowerInvariant();
     public string TestingUserName => $"{EnvironmentName}.{ApplicationName}.test.user";
     public string TestingUserEmail => $"{TestingUserName}@noreply.com";
     public string ResourceGroupName => GetResourceGroupName(LayerName);
-    public string SiteStorageAccountName => $"st{EnvironmentName}{ApplicationName}{LayerName}site";
-    public string BackendStorageAccountName => $"st{EnvironmentName}{ApplicationName}{LayerName}be";
+    public string WebAppStorageAccountName =>
+        $"st{EnvironmentName}{ApplicationName}{PersistenceStack.LayerName}wa";
+    public string BackendStorageAccountName =>
+        $"st{EnvironmentName}{ApplicationName}{PersistenceStack.LayerName}be";
     public string FunctionAppName => $"func-{EnvironmentName}-{ApplicationName}-{LayerName}";
     public string AppServicePlanName => $"plan-{EnvironmentName}-{ApplicationName}-{LayerName}";
 

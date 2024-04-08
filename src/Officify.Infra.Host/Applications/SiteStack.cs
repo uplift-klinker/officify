@@ -15,7 +15,7 @@ public class SiteStack : OfficifyStackBase
             "static-site",
             new StorageAccountStaticWebsiteArgs
             {
-                AccountName = Naming.SiteStorageAccountName,
+                AccountName = Naming.WebAppStorageAccountName,
                 ResourceGroupName = Naming.GetResourceGroupName(PersistenceStack.LayerName),
                 IndexDocument = "index.html",
                 Error404Document = "index.html",

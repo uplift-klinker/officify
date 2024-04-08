@@ -27,7 +27,7 @@ public class PersistenceStackTests
         >(PersistenceStack.LayerName);
 
         var siteStorage = storageAccounts[0];
-        await siteStorage.Name.Should().HaveValueAsync("stdevofficifypersistsite");
+        await siteStorage.Name.Should().HaveValueAsync("stdevofficifypersistwa");
         await siteStorage.Kind.Should().HaveValueAsync("StorageV2");
         await siteStorage.AccessTier.Should().HaveValueAsync("Hot");
         await siteStorage.EnableHttpsTrafficOnly.Should().HaveValueAsync(true);

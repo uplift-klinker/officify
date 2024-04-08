@@ -16,11 +16,11 @@ public class AuthStack : OfficifyStackBase
     [Output("test-user-email")]
     public Output<string?> TestUserEmail { get; set; }
 
-    [Output("web-client-id")]
-    public Output<string> WebClientId { get; set; }
+    [Output("web-app-client-id")]
+    public Output<string> WebAppClientId { get; set; }
 
-    [Output("web-client-secret")]
-    public Output<string> WebClientSecret { get; set; }
+    [Output("web-app-client-secret")]
+    public Output<string> WebAppClientSecret { get; set; }
 
     [Output("api-audience")]
     public Output<string> ApiAudience { get; set; }
@@ -28,13 +28,13 @@ public class AuthStack : OfficifyStackBase
     public AuthStack()
         : base()
     {
-        var apiResourceServer = CreateResourceServer();
+        var apiResourceServer = CreateBackendResourceServer();
         ApiAudience = apiResourceServer.Identifier;
 
-        var webAppClient = CreateWebClient();
-        var webAppClientCredentials = CreateWebClientCredentials(webAppClient);
-        WebClientId = webAppClient.ClientId;
-        WebClientSecret = Output.CreateSecret(webAppClientCredentials.ClientSecret);
+        var webAppClient = CreateWebAppClient();
+        var webAppClientCredentials = CreateWebAppClientCredentials(webAppClient);
+        WebAppClientId = webAppClient.ClientId;
+        WebAppClientSecret = Output.CreateSecret(webAppClientCredentials.ClientSecret);
 
         var testUserPassword = CreateRandomPassword();
         TestUserPassword = Output.CreateSecret(testUserPassword.Result);
@@ -43,10 +43,10 @@ public class AuthStack : OfficifyStackBase
         TestUserEmail = testUser.Email;
     }
 
-    private ResourceServer CreateResourceServer()
+    private ResourceServer CreateBackendResourceServer()
     {
         return new ResourceServer(
-            "api-resource-server",
+            "backend-resource-server",
             new ResourceServerArgs
             {
                 Identifier = Naming.ApiAudienceIdentifier,
@@ -55,15 +55,20 @@ public class AuthStack : OfficifyStackBase
         );
     }
 
-    private Client CreateWebClient()
+    private Client CreateWebAppClient()
     {
         return new Client(
             "web-app-client",
-            new ClientArgs { Name = Naming.WebAppAuthClientName, OidcConformant = true, }
+            new ClientArgs
+            {
+                Name = Naming.WebAppAuthClientName,
+                OidcConformant = true,
+                Callbacks = GetCallbackUrls()
+            }
         );
     }
 
-    private ClientCredentials CreateWebClientCredentials(Client client)
+    private ClientCredentials CreateWebAppClientCredentials(Client client)
     {
         return new ClientCredentials(
             "web-app-client-credentials",
@@ -105,5 +110,21 @@ public class AuthStack : OfficifyStackBase
                 ConnectionName = UsernamePasswordAuthConnectionName,
             }
         );
+    }
+
+    private string[] GetCallbackUrls()
+    {
+        if (!IsDevelopment)
+        {
+            return [$"https://{Naming.WebAppStorageAccountName}.z14.web.core.windows.net/"];
+        }
+        ;
+
+        return
+        [
+            $"https://{Naming.WebAppStorageAccountName}.z14.web.core.windows.net/",
+            "http://localhost:5001/",
+            "https://localhost:5003/"
+        ];
     }
 }

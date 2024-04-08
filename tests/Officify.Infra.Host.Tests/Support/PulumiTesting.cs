@@ -15,10 +15,13 @@ public static class PulumiTesting
         );
     }
 
-    public static async Task<T[]> DeployAndGetResourcesOfType<TStack, T>(string layerName)
+    public static async Task<T[]> DeployAndGetResourcesOfType<TStack, T>(
+        string layerName,
+        string env = "dev"
+    )
         where TStack : Stack, new()
     {
-        var resources = await TestAsync<TStack>($"dev-{layerName}");
+        var resources = await TestAsync<TStack>($"{env}-{layerName}");
         return resources.OfType<T>().ToArray();
     }
 }
