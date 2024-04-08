@@ -10,7 +10,7 @@ on:
         required: true
       auth0-client-secret:
         required: true
-      auth0-client-domain:
+      auth0-domain:
         required: true
       arm-client-id:
         required: true
