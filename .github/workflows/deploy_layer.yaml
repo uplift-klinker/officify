@@ -50,7 +50,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.arm-subscription-id }}
       ARM_TENANT_ID: ${{ secrets.arm-tenant-id }}
 
-      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.pulumi-passphrase }}
+      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.pulumi-config-passphrase }}
       AZURE_STORAGE_ACCOUNT: ${{ secrets.pulumi-backend-account-name }}
       AZURE_STORAGE_KEY: ${{ secrets.pulumi-backend-account-key }}
 
