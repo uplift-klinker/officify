@@ -16,6 +16,7 @@ on:
       auth0-client-domain:
         required: true
 
+name: Deploy ${{ inputs.target-env }} ${{ inputs.layer-name }}
 jobs:
   deploy:
     runs-on: ubuntu-22.04
