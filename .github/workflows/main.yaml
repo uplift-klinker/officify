@@ -20,6 +20,13 @@ jobs:
         with:
           global-json-file: global.json
           
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+          
       - name: Install Required Software
         run: ${{ github.workspace }}/install-ubuntu-software.sh
 
