@@ -40,7 +40,7 @@ public class PersistenceStack : OfficifyStackBase
         BackendStorageAccountName = backendStorageAccount.Name;
 
         var logAnalyticsWorkspace = new Workspace(
-            "log-analytics-workspace",
+            "log-analytics",
             new WorkspaceArgs
             {
                 ResourceGroupName = resourceGroup.Name,
