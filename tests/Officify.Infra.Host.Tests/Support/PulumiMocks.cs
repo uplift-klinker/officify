@@ -14,6 +14,7 @@ public class PulumiMocks : IMocks
         {
             outputs.Add("name", LocateActualResourceName(args));
         }
+
         args.Id ??= $"{args.Name}_id";
         return Task.FromResult<(string?, object state)>((args.Id, outputs));
     }
@@ -45,6 +46,7 @@ public class PulumiMocks : IMocks
             "azure-native:storage:StorageAccount" => "accountName",
             "azure-native:operationalinsights:Workspace" => "workspaceName",
             "azure-native:insights:Component" => "resourceName",
+            "azure-native:signalrservice:SignalR" => "resourceName",
             "azure-native:storage:Blob" => "blobName",
             _ => null
         };

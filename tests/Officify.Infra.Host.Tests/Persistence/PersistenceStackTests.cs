@@ -61,6 +61,6 @@ public class PersistenceStackTests
 
         workspaces.Should().HaveCount(1);
         await workspaces[0].Name.Should().HaveValueAsync("log-dev-officify-persist");
-        await workspaces[0].RetentionInDays.Should().HaveValueAsync(1);
+        await workspaces[0].RetentionInDays.Should().HaveValueAsync(30);
     }
 }

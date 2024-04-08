@@ -1,5 +1,6 @@
 using Officify.Infra.Host.Applications;
 using Pulumi.AzureNative.Insights;
+using Pulumi.AzureNative.SignalRService;
 using Pulumi.AzureNative.Web;
 
 namespace Officify.Infra.Host.Tests.Applications;
@@ -36,5 +37,24 @@ public class ApiStackTests
         await insights[0].Name.Should().HaveValueAsync("appi-dev-officify-api");
         await insights[0].Kind.Should().HaveValueAsync("web");
         await insights[0].ApplicationType.Should().HaveValueAsync("other");
+    }
+
+    [Fact]
+    public async Task WhenApiStackDeployedThenCreatesSignalrService()
+    {
+        var signalrServices = await PulumiTesting.DeployAndGetResourcesOfType<ApiStack, SignalR>(
+            ApiStack.LayerName
+        );
+
+        signalrServices.Should().HaveCount(1);
+
+        var service = signalrServices[0];
+        await service.Name.Should().HaveValueAsync("sigr-dev-officify-api");
+        await service.Kind.Should().HaveValueAsync("SignalR");
+
+        var sku = await service.Sku.GetValueAsync();
+        sku?.Name.Should().Be("Free_F1");
+        sku?.Capacity.Should().Be(1);
+        sku?.Tier.Should().Be("Free");
     }
 }

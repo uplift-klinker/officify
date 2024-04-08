@@ -4,6 +4,8 @@ using Pulumi;
 using Pulumi.AzureNative.Insights;
 using Pulumi.AzureNative.OperationalInsights;
 using Pulumi.AzureNative.Resources;
+using Pulumi.AzureNative.SignalRService;
+using Pulumi.AzureNative.SignalRService.Inputs;
 using Pulumi.AzureNative.Storage;
 using Pulumi.AzureNative.Web;
 using Pulumi.AzureNative.Web.Inputs;
@@ -58,6 +60,22 @@ public class ApiStack : OfficifyStackBase
                 Kind = "web",
                 WorkspaceResourceId = workspace.Apply(w => w.Id),
                 ApplicationType = "other",
+            }
+        );
+
+        var signalR = new SignalR(
+            "api-signalr",
+            new SignalRArgs
+            {
+                ResourceName = Naming.SignalRServiceName,
+                ResourceGroupName = Naming.ResourceGroupName,
+                Kind = "SignalR",
+                Sku = new ResourceSkuArgs
+                {
+                    Name = "Free_F1",
+                    Tier = SignalRSkuTier.Free,
+                    Capacity = 1
+                }
             }
         );
 

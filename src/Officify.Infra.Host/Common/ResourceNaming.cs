@@ -33,6 +33,8 @@ public class ResourceNaming(DeploymentInstance deployment)
     public string ApplicationInsightsName =>
         $"appi-{EnvironmentName}-{ApplicationName}-{LayerName}";
 
+    public string SignalRServiceName => $"sigr-{EnvironmentName}-{ApplicationName}-{LayerName}";
+
     public static ResourceNaming FromDeployment()
     {
         return new ResourceNaming(Deployment.Instance);

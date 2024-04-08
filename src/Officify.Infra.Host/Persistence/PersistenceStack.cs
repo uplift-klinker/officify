@@ -1,9 +1,11 @@
 using Officify.Infra.Host.Common;
 using Pulumi;
 using Pulumi.AzureNative.OperationalInsights;
+using Pulumi.AzureNative.OperationalInsights.Inputs;
 using Pulumi.AzureNative.Resources;
 using Pulumi.AzureNative.Storage;
 using Pulumi.AzureNative.Storage.Inputs;
+using StorageAccountArgs = Pulumi.AzureNative.Storage.StorageAccountArgs;
 
 namespace Officify.Infra.Host.Persistence;
 
@@ -43,7 +45,8 @@ public class PersistenceStack : OfficifyStackBase
             {
                 ResourceGroupName = resourceGroup.Name,
                 WorkspaceName = Naming.LogAnalyticsWorkspaceName,
-                RetentionInDays = 1
+                RetentionInDays = 30,
+                Sku = new WorkspaceSkuArgs { Name = WorkspaceSkuNameEnum.Free }
             }
         );
     }
