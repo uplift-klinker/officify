@@ -36,7 +36,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-22.04
-    name: Deploy ${{ inputs.target-env }}
+    name: ${{ inputs.target-env }} ${{ inputs.target-layer }}
     env:
       STACK_NAME: ${{ inputs.target-env }}
       TARGET_LAYER_NAME: ${{ inputs.target-layer }}

@@ -32,7 +32,7 @@ on:
 
 jobs: 
   persistence:
-    name: Deploy Persistence
+    name: Persistence
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit
     with:
@@ -41,7 +41,7 @@ jobs:
       preview: ${{ inputs.preview }}
     
   auth:
-    name: Deploy Auth
+    name: Auth
     needs: [persistence]
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit
@@ -51,7 +51,7 @@ jobs:
       preview: ${{ inputs.preview }}
       
   api:
-    name: Deploy Api
+    name: Api
     needs: [auth, persistence]
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit
@@ -61,7 +61,7 @@ jobs:
       preview: ${{ inputs.preview }}
 
   site:
-    name: Deploy Site
+    name: Site
     needs: [api]
     uses: ./.github/workflows/deploy_layer.yaml
     secrets: inherit

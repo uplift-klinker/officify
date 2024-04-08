@@ -34,7 +34,7 @@ jobs:
         working-directory: ${{ github.workspace }}
   
   preview_dev:
-    name: Preview Infra Changes on Dev
+    name: Dev Infra Preview
     uses: ./.github/workflows/deploy_env.yaml
     with:
       target-env: 'dev'
