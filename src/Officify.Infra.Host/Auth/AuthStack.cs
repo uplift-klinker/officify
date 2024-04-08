@@ -7,6 +7,7 @@ namespace Officify.Infra.Host.Auth;
 
 public class AuthStack : OfficifyStackBase
 {
+    public const string LayerName = "auth";
     private const string UsernamePasswordAuthConnectionName = "Username-Password-Authentication";
 
     [Output("test-user-password")]
@@ -25,6 +26,7 @@ public class AuthStack : OfficifyStackBase
     public Output<string> ApiAudience { get; set; }
 
     public AuthStack()
+        : base(LayerName)
     {
         var apiResourceServer = CreateResourceServer();
         ApiAudience = apiResourceServer.Identifier;

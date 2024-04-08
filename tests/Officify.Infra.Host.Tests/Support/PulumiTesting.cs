@@ -14,4 +14,11 @@ public static class PulumiTesting
             new TestOptions { StackName = stackName, IsPreview = false }
         );
     }
+
+    public static async Task<T[]> DeployAndGetResourcesOfType<TStack, T>()
+        where TStack : Stack, new()
+    {
+        var resources = await TestAsync<TStack>();
+        return resources.OfType<T>().ToArray();
+    }
 }

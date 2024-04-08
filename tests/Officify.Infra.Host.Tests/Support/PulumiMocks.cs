@@ -5,17 +5,50 @@ namespace Officify.Infra.Host.Tests.Support;
 
 public class PulumiMocks : IMocks
 {
-    public ImmutableArray<MockResourceArgs> NewResourceArgs { get; private set; } =
-        ImmutableArray<MockResourceArgs>.Empty;
-
     public Task<(string? id, object state)> NewResourceAsync(MockResourceArgs args)
     {
-        NewResourceArgs = NewResourceArgs.Add(args);
-        return Task.FromResult<(string? id, object state)>((args.Id, args.Inputs));
+        var outputs = ImmutableDictionary.CreateBuilder<string, object>();
+
+        outputs.AddRange(args.Inputs);
+        if (!args.Inputs.ContainsKey("name"))
+        {
+            outputs.Add("name", LocateActualResourceName(args));
+        }
+        args.Id ??= $"{args.Name}_id";
+        return Task.FromResult((args.Id, (object)outputs));
     }
 
     public Task<object> CallAsync(MockCallArgs args)
     {
-        return Task.FromResult<object>(args);
+        return Task.FromResult<object>(args.Args);
+    }
+
+    private string LocateActualResourceName(MockResourceArgs args)
+    {
+        var name = args.Name ?? "name";
+        var nameKey = LocateResourceNameKey(args);
+        if (string.IsNullOrWhiteSpace(nameKey))
+            return name;
+
+        var keyValue = args.Inputs.TryGetValue(nameKey, out var value) ? value : null;
+        if (keyValue is string actualName)
+            return actualName;
+
+        return name;
+    }
+
+    private string? LocateResourceNameKey(MockResourceArgs args)
+    {
+        if (args.Type == "azure-native:resources:ResourceGroup")
+        {
+            return "resourceGroupName";
+        }
+
+        if (args.Type == "azure-native:storage:StorageAccount")
+        {
+            return "accountName";
+        }
+
+        return null;
     }
 }

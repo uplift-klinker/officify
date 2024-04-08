@@ -1,0 +1,56 @@
+on:
+  workflow_call:
+    inputs:
+      target-env:
+        required: true
+        type: string
+        
+    secrets:
+      auth0-client-id:
+        required: true
+      auth0-client-secret:
+        required: true
+      auth0-client-domain:
+        required: true
+
+jobs: 
+  deploy_env:
+    runs-on: ubuntu-22.04
+    name: Deploy ${{ inputs.target-env }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/deploy_layer.yaml
+        with:
+          target-env: ${{ inputs.target-env }}
+          target-layer: 'persist'
+        secrets:
+          auth0-client-id: ${{ inputs.auth0-client-id }}
+          auth0-client-secret: ${{ inputs.auth0-client-secret }}
+          auth0-domain: ${{ inputs.auth0-domain }}
+          
+      - uses: ./.github/workflows/deploy_layer.yaml
+        with:
+          target-env: ${{ inputs.target-env }}
+          target-layer: 'auth'
+        secrets:
+          auth0-client-id: ${{ inputs.auth0-client-id }}
+          auth0-client-secret: ${{ inputs.auth0-client-secret }}
+          auth0-domain: ${{ inputs.auth0-domain }}
+          
+      - uses: ./.github/workflows/deploy_layer.yaml
+        with:
+          target-env: ${{ inputs.target-env }}
+          target-layer: 'api'
+        secrets:
+          auth0-client-id: ${{ inputs.auth0-client-id }}
+          auth0-client-secret: ${{ inputs.auth0-client-secret }}
+          auth0-domain: ${{ inputs.auth0-domain }}
+
+      - uses: ./.github/workflows/deploy_layer.yaml
+        with:
+          target-env: ${{ inputs.target-env }}
+          target-layer: 'site'
+        secrets:
+          auth0-client-id: ${{ inputs.auth0-client-id }}
+          auth0-client-secret: ${{ inputs.auth0-client-secret }}
+          auth0-domain: ${{ inputs.auth0-domain }}

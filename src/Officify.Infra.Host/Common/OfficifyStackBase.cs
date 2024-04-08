@@ -2,7 +2,7 @@ using Pulumi;
 
 namespace Officify.Infra.Host.Common;
 
-public abstract class OfficifyStackBase : Stack
+public abstract class OfficifyStackBase(string layerName) : Stack
 {
-    public ResourceNaming Naming { get; init; } = ResourceNaming.FromDeployment();
+    public ResourceNaming Naming { get; } = ResourceNaming.FromDeployment(layerName);
 }
