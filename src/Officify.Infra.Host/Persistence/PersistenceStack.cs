@@ -46,7 +46,7 @@ public class PersistenceStack : OfficifyStackBase
                 ResourceGroupName = resourceGroup.Name,
                 WorkspaceName = Naming.LogAnalyticsWorkspaceName,
                 RetentionInDays = 30,
-                Sku = new WorkspaceSkuArgs { Name = WorkspaceSkuNameEnum.Free }
+                Sku = new WorkspaceSkuArgs { Name = WorkspaceSkuNameEnum.PerGB2018 }
             }
         );
     }

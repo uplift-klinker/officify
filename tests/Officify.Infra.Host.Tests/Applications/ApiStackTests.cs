@@ -24,6 +24,7 @@ public class ApiStackTests
         appSettings.Should().Contain("FUNCTIONS_EXTENSION_VERSION", "~4");
         appSettings.Should().Contain("FUNCTIONS_WORKER_RUNTIME", "dotnet-isolated");
         appSettings.Should().ContainKey("APPLICATIONINSIGHTS_CONNECTION_STRING");
+        appSettings.Should().ContainKey("SIGNALR_URL");
     }
 
     [Fact]

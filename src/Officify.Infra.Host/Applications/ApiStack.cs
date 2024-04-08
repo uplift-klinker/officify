@@ -99,7 +99,8 @@ public class ApiStack : OfficifyStackBase
                         CreateAppSetting(
                             "APPLICATIONINSIGHTS_CONNECTION_STRING",
                             insights.ConnectionString
-                        )
+                        ),
+                        CreateAppSetting("SIGNALR_URL", signalR.HostName)
                     ]
                 }
             }
