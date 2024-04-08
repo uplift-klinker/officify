@@ -1,5 +1,6 @@
 using Officify.Infra.Host.Common;
 using Pulumi;
+using Pulumi.AzureNative.OperationalInsights;
 using Pulumi.AzureNative.Resources;
 using Pulumi.AzureNative.Storage;
 using Pulumi.AzureNative.Storage.Inputs;
@@ -35,6 +36,16 @@ public class PersistenceStack : OfficifyStackBase
             CreateStorageAccountArgs(resourceGroup, Naming.BackendStorageAccountName)
         );
         BackendStorageAccountName = backendStorageAccount.Name;
+
+        var logAnalyticsWorkspace = new Workspace(
+            "log-analytics-workspace",
+            new WorkspaceArgs
+            {
+                ResourceGroupName = resourceGroup.Name,
+                WorkspaceName = Naming.LogAnalyticsWorkspaceName,
+                RetentionInDays = 1
+            }
+        );
     }
 
     private static StorageAccountArgs CreateStorageAccountArgs(

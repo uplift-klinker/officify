@@ -19,12 +19,19 @@ public class ResourceNaming(DeploymentInstance deployment)
     public string TestingUserName => $"{EnvironmentName}.{ApplicationName}.test.user";
     public string TestingUserEmail => $"{TestingUserName}@noreply.com";
     public string ResourceGroupName => GetResourceGroupName(LayerName);
+    public string FunctionAppName => $"func-{EnvironmentName}-{ApplicationName}-{LayerName}";
+
+    public string AppServicePlanName => $"plan-{EnvironmentName}-{ApplicationName}-{LayerName}";
     public string WebAppStorageAccountName =>
         $"st{EnvironmentName}{ApplicationName}{PersistenceStack.LayerName}wa";
     public string BackendStorageAccountName =>
         $"st{EnvironmentName}{ApplicationName}{PersistenceStack.LayerName}be";
-    public string FunctionAppName => $"func-{EnvironmentName}-{ApplicationName}-{LayerName}";
-    public string AppServicePlanName => $"plan-{EnvironmentName}-{ApplicationName}-{LayerName}";
+
+    public string LogAnalyticsWorkspaceName =>
+        $"log-{EnvironmentName}-{ApplicationName}-{PersistenceStack.LayerName}";
+
+    public string ApplicationInsightsName =>
+        $"appi-{EnvironmentName}-{ApplicationName}-{LayerName}";
 
     public static ResourceNaming FromDeployment()
     {

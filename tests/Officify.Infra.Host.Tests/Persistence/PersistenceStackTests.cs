@@ -1,4 +1,5 @@
 using Officify.Infra.Host.Persistence;
+using Pulumi.AzureNative.OperationalInsights;
 using Pulumi.AzureNative.Resources;
 using Pulumi.AzureNative.Storage;
 
@@ -48,5 +49,18 @@ public class PersistenceStackTests
         await backendStorage.AccessTier.Should().HaveValueAsync("Hot");
         await backendStorage.EnableHttpsTrafficOnly.Should().HaveValueAsync(true);
         await backendStorage.AllowBlobPublicAccess.Should().HaveValueAsync(false);
+    }
+
+    [Fact]
+    public async Task WhenPersistenceStackIsDeployedThenCreatesLogAnalyticsWorkspace()
+    {
+        var workspaces = await PulumiTesting.DeployAndGetResourcesOfType<
+            PersistenceStack,
+            Workspace
+        >(PersistenceStack.LayerName);
+
+        workspaces.Should().HaveCount(1);
+        await workspaces[0].Name.Should().HaveValueAsync("log-dev-officify-persist");
+        await workspaces[0].RetentionInDays.Should().HaveValueAsync(1);
     }
 }

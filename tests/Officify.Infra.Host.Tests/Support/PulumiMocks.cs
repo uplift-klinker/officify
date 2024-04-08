@@ -39,16 +39,14 @@ public class PulumiMocks : IMocks
 
     private string? LocateResourceNameKey(MockResourceArgs args)
     {
-        if (args.Type == "azure-native:resources:ResourceGroup")
+        return args.Type switch
         {
-            return "resourceGroupName";
-        }
-
-        if (args.Type == "azure-native:storage:StorageAccount")
-        {
-            return "accountName";
-        }
-
-        return null;
+            "azure-native:resources:ResourceGroup" => "resourceGroupName",
+            "azure-native:storage:StorageAccount" => "accountName",
+            "azure-native:operationalinsights:Workspace" => "workspaceName",
+            "azure-native:insights:Component" => "resourceName",
+            "azure-native:storage:Blob" => "blobName",
+            _ => null
+        };
     }
 }

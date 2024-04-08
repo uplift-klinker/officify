@@ -11,5 +11,9 @@
         <PackageReference Include="Pulumi.Auth0" Version="3.3.0"/>
         <PackageReference Include="Pulumi.Random" Version="4.16.0"/>
     </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Officify.Models\Officify.Models.csproj" />
+    </ItemGroup>
 
 </Project>

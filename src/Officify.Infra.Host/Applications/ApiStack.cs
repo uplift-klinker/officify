@@ -1,6 +1,8 @@
 using Officify.Infra.Host.Common;
 using Officify.Infra.Host.Persistence;
 using Pulumi;
+using Pulumi.AzureNative.Insights;
+using Pulumi.AzureNative.OperationalInsights;
 using Pulumi.AzureNative.Resources;
 using Pulumi.AzureNative.Storage;
 using Pulumi.AzureNative.Web;
@@ -20,11 +22,20 @@ public class ApiStack : OfficifyStackBase
             new ResourceGroupArgs { ResourceGroupName = Naming.ResourceGroupName, }
         );
 
+        var persistenceResourceGroupName = Naming.GetResourceGroupName(PersistenceStack.LayerName);
         var storageAccount = GetStorageAccount.Invoke(
             new GetStorageAccountInvokeArgs
             {
                 AccountName = Naming.BackendStorageAccountName,
-                ResourceGroupName = Naming.GetResourceGroupName(PersistenceStack.LayerName)
+                ResourceGroupName = persistenceResourceGroupName
+            }
+        );
+
+        var workspace = GetWorkspace.Invoke(
+            new GetWorkspaceInvokeArgs
+            {
+                ResourceGroupName = persistenceResourceGroupName,
+                WorkspaceName = Naming.LogAnalyticsWorkspaceName
             }
         );
 
@@ -35,6 +46,18 @@ public class ApiStack : OfficifyStackBase
                 Name = Naming.AppServicePlanName,
                 ResourceGroupName = resourceGroup.Name,
                 Sku = new SkuDescriptionArgs { Name = "Y1", Tier = "Dynamic" }
+            }
+        );
+
+        var insights = new Component(
+            "api-insights",
+            new ComponentArgs
+            {
+                ResourceName = Naming.ApplicationInsightsName,
+                ResourceGroupName = Naming.ResourceGroupName,
+                Kind = "web",
+                WorkspaceResourceId = workspace.Apply(w => w.Id),
+                ApplicationType = "other",
             }
         );
 
@@ -55,13 +78,17 @@ public class ApiStack : OfficifyStackBase
                     [
                         CreateAppSetting("FUNCTIONS_EXTENSION_VERSION", "~4"),
                         CreateAppSetting("FUNCTIONS_WORKER_RUNTIME", "dotnet-isolated"),
+                        CreateAppSetting(
+                            "APPLICATIONINSIGHTS_CONNECTION_STRING",
+                            insights.ConnectionString
+                        )
                     ]
                 }
             }
         );
     }
 
-    private NameValuePairArgs CreateAppSetting(Input<string> name, Input<string> value)
+    private static NameValuePairArgs CreateAppSetting(Input<string> name, Input<string> value)
     {
         return new NameValuePairArgs { Name = name, Value = value };
     }
