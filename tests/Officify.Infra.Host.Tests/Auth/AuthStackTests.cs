@@ -56,9 +56,6 @@ public class AuthStackTests
     }
 
     [Fact]
-    public async Task WhenAuthStackIsDeployedToProdThenOnlyAddsSiteCallbackUrls() { }
-
-    [Fact]
     public async Task WhenAuthStackIsDeployedThenCreatesWebAppClientCredentials()
     {
         var credentials = await PulumiTesting.DeployAndGetResourcesOfType<

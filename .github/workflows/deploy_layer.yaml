@@ -79,7 +79,7 @@ jobs:
       - run: ${{ github.workspace }}/infra-login.sh
         name: Login To Infra
 
-      - uses: pulumi/actions@v4
+      - uses: pulumi/actions@v5
         name: Preview Changes
         if: ${{ inputs.preview == true }}
         continue-on-error: true
@@ -88,8 +88,9 @@ jobs:
           cloud-url: azblob://${{ env.INFRA_STATE_CONTAINER_NAME }}
           stack-name: ${{ env.STACK_NAME }}
           work-dir: ${{ env.INFRA_PROJECT_PATH }}
+          comment-on-summary: true
 
-      - uses: pulumi/actions@v4
+      - uses: pulumi/actions@v5
         name: Deploy Changes
         if: ${{ inputs.preview == false }} 
         with:
@@ -97,3 +98,4 @@ jobs:
           cloud-url: azblob://${{ env.INFRA_STATE_CONTAINER_NAME }}
           stack-name: ${{ env.STACK_NAME }}
           work-dir: ${{ env.INFRA_PROJECT_PATH }}
+          comment-on-summary: true
