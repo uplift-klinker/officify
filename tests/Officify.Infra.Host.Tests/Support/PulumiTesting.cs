@@ -6,7 +6,7 @@ namespace Officify.Infra.Host.Tests.Support;
 
 public static class PulumiTesting
 {
-    public static Task<ImmutableArray<Resource>> TestAsync<T>(string stackName = "dev")
+    public static Task<ImmutableArray<Resource>> TestAsync<T>(string stackName)
         where T : Stack, new()
     {
         return Deployment.TestAsync<T>(
@@ -15,10 +15,10 @@ public static class PulumiTesting
         );
     }
 
-    public static async Task<T[]> DeployAndGetResourcesOfType<TStack, T>()
+    public static async Task<T[]> DeployAndGetResourcesOfType<TStack, T>(string layerName)
         where TStack : Stack, new()
     {
-        var resources = await TestAsync<TStack>();
+        var resources = await TestAsync<TStack>($"dev-{layerName}");
         return resources.OfType<T>().ToArray();
     }
 }

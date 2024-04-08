@@ -43,7 +43,7 @@ jobs:
   preview_dev:
     name: Dev Preview
     uses: ./.github/workflows/deploy_env.yaml
-    needs: [verify]
+    concurrency: 'preview_dev'
     with:
       target-env: 'dev'
       preview: true

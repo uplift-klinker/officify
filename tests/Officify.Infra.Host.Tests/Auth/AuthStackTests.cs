@@ -12,7 +12,7 @@ public class AuthStackTests
         var resourceServers = await PulumiTesting.DeployAndGetResourcesOfType<
             AuthStack,
             ResourceServer
-        >();
+        >(AuthStack.LayerName);
         resourceServers.Should().HaveCount(1);
 
         var resourceServer = resourceServers.Single();
@@ -23,7 +23,9 @@ public class AuthStackTests
     [Fact]
     public async Task WhenAuthStackIsDeployedThenCreatesWebAppClient()
     {
-        var clients = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, Client>();
+        var clients = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, Client>(
+            AuthStack.LayerName
+        );
         clients.Should().HaveCount(1);
 
         await clients[0].Name.Should().HaveValueAsync("Officify Dev Web");
@@ -35,7 +37,7 @@ public class AuthStackTests
         var credentials = await PulumiTesting.DeployAndGetResourcesOfType<
             AuthStack,
             ClientCredentials
-        >();
+        >(AuthStack.LayerName);
         credentials.Should().HaveCount(1);
 
         await credentials[0].AuthenticationMethod.Should().HaveValueAsync("client_secret_post");
@@ -44,7 +46,9 @@ public class AuthStackTests
     [Fact]
     public async Task WhenAuthStackIsDeployedThenCreatesTestUser()
     {
-        var users = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, User>();
+        var users = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, User>(
+            AuthStack.LayerName
+        );
         users.Should().HaveCount(1);
 
         var user = users.Single();
@@ -59,14 +63,18 @@ public class AuthStackTests
     [Fact]
     public async Task WhenAuthStackIsDeployedThenCreatesTestUserPassword()
     {
-        var password = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, RandomPassword>();
+        var password = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, RandomPassword>(
+            AuthStack.LayerName
+        );
         password.Should().HaveCount(1);
     }
 
     [Fact]
     public async Task WhenAuthStackIsDeployedThenItHasOutputsForDownstreamUsage()
     {
-        var stacks = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, AuthStack>();
+        var stacks = await PulumiTesting.DeployAndGetResourcesOfType<AuthStack, AuthStack>(
+            AuthStack.LayerName
+        );
         stacks.Should().HaveCount(1);
 
         var stack = stacks.Single();

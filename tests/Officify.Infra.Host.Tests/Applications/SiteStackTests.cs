@@ -11,7 +11,7 @@ public class SiteStackTests
         var sites = await PulumiTesting.DeployAndGetResourcesOfType<
             SiteStack,
             StorageAccountStaticWebsite
-        >();
+        >(SiteStack.LayerName);
 
         sites.Should().HaveCount(1);
 

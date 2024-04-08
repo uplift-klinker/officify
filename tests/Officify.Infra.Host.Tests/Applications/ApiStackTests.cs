@@ -8,7 +8,9 @@ public class ApiStackTests
     [Fact]
     public async Task WhenApiStackDeployedThenCreatesFunctionApp()
     {
-        var webApps = await PulumiTesting.DeployAndGetResourcesOfType<ApiStack, WebApp>();
+        var webApps = await PulumiTesting.DeployAndGetResourcesOfType<ApiStack, WebApp>(
+            ApiStack.LayerName
+        );
         webApps.Should().HaveCount(1);
 
         var functionApp = webApps[0];

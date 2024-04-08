@@ -12,7 +12,7 @@ public class PersistenceStackTests
         var resourceGroups = await PulumiTesting.DeployAndGetResourcesOfType<
             PersistenceStack,
             ResourceGroup
-        >();
+        >(PersistenceStack.LayerName);
 
         resourceGroups.Should().HaveCount(1);
         await resourceGroups[0].Name.Should().HaveValueAsync("rg-dev-officify-persist");
@@ -24,7 +24,7 @@ public class PersistenceStackTests
         var storageAccounts = await PulumiTesting.DeployAndGetResourcesOfType<
             PersistenceStack,
             StorageAccount
-        >();
+        >(PersistenceStack.LayerName);
 
         var siteStorage = storageAccounts[0];
         await siteStorage.Name.Should().HaveValueAsync("stdevofficifypersistsite");
@@ -40,7 +40,7 @@ public class PersistenceStackTests
         var storageAccounts = await PulumiTesting.DeployAndGetResourcesOfType<
             PersistenceStack,
             StorageAccount
-        >();
+        >(PersistenceStack.LayerName);
 
         var backendStorage = storageAccounts[1];
         await backendStorage.Name.Should().HaveValueAsync("stdevofficifypersistbe");
