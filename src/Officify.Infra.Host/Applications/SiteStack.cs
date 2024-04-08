@@ -9,7 +9,7 @@ public class SiteStack : OfficifyStackBase
     public const string LayerName = "site";
 
     public SiteStack()
-        : base(LayerName)
+        : base()
     {
         var staticSite = new StorageAccountStaticWebsite(
             "static-site",

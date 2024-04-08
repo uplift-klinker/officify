@@ -13,7 +13,7 @@ public class ApiStack : OfficifyStackBase
     public const string LayerName = "api";
 
     public ApiStack()
-        : base(LayerName)
+        : base()
     {
         var resourceGroup = new ResourceGroup(
             "api-group",

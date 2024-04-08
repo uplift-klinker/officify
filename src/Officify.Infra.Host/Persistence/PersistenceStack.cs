@@ -17,7 +17,7 @@ public class PersistenceStack : OfficifyStackBase
     public Output<string> BackendStorageAccountName { get; set; }
 
     public PersistenceStack()
-        : base(LayerName)
+        : base()
     {
         var resourceGroup = new ResourceGroup(
             "resource-group",

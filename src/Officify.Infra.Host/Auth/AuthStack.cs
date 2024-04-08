@@ -26,7 +26,7 @@ public class AuthStack : OfficifyStackBase
     public Output<string> ApiAudience { get; set; }
 
     public AuthStack()
-        : base(LayerName)
+        : base()
     {
         var apiResourceServer = CreateResourceServer();
         ApiAudience = apiResourceServer.Identifier;
