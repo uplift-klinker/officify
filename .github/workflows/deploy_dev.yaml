@@ -12,7 +12,8 @@ jobs:
     uses: ./.github/workflows/deploy_env.yaml
     with:
       target-env: 'dev'
-    
+      preview: false
+      
     secrets:
       auth0-client-id: ${{ secrets.DEV_AUTH0_CLIENT_ID }}
       auth0-client-secret: ${{ secrets.DEV_AUTH0_CLIENT_SECRET }}

@@ -4,6 +4,9 @@ on:
       target-env:
         required: true
         type: string
+      preview:
+        required: true
+        type: boolean
         
     secrets:
       auth0-client-id:
@@ -31,6 +34,7 @@ jobs:
     with:
       target-env: ${{ inputs.target-env }}
       target-layer: 'persist'
+      preview: ${{ inputs.preview }}
     
   auth:
     name: Deploy Auth
@@ -40,6 +44,7 @@ jobs:
     with:
       target-env: ${{ inputs.target-env }}
       target-layer: 'auth'
+      preview: ${{ inputs.preview }}
       
   api:
     name: Deploy Api
@@ -49,6 +54,7 @@ jobs:
     with:
       target-env: ${{ inputs.target-env }}
       target-layer: 'api'
+      preview: ${{ inputs.preview }}
 
   site:
     name: Deploy Site
@@ -58,3 +64,4 @@ jobs:
     with:
       target-env: ${{ inputs.target-env }}
       target-layer: 'site'
+      preview: ${{ inputs.preview }}
