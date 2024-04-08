@@ -37,16 +37,16 @@ jobs:
       STACK_NAME: ${{ inputs.target-env }}
       TARGET_LAYER_NAME: ${{ inputs.target-layer }}
       
-      AUTH0_CLIENT_ID: ${{ inputs.auth0-client-id }}
-      AUTH0_CLIENT_SECRET: ${{ inputs.auth0-client-secret }}
-      AUTH0_DOMAIN: ${{ inputs.auth0-domain }}
+      AUTH0_CLIENT_ID: ${{ secrets.auth0-client-id }}
+      AUTH0_CLIENT_SECRET: ${{ secrets.auth0-client-secret }}
+      AUTH0_DOMAIN: ${{ secrets.auth0-domain }}
 
-      ARM_CLIENT_ID: ${{ inputs.arm-client-id }}
-      ARM_CLIENT_SECRET: ${{ inputs.arm-client-secret }}
-      ARM_SUBSCRIPTION_ID: ${{ inputs.arm-subscription-id }}
-      ARM_TENANT_ID: ${{ inputs.arm-tenant-id }}
+      ARM_CLIENT_ID: ${{ secrets.arm-client-id }}
+      ARM_CLIENT_SECRET: ${{ secrets.arm-client-secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.arm-subscription-id }}
+      ARM_TENANT_ID: ${{ secrets.arm-tenant-id }}
 
-      PULUMI_CONFIG_PASSPHRASE: ${{ inputs.pulumi-passphrase }}
+      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.pulumi-passphrase }}
 
       INFRA_PROJECT_PATH: ${{ github.workspace }}/src/Officify.Infra.Host
       INFRA_STATE_CONTAINER_NAME: 'officify-infra'
