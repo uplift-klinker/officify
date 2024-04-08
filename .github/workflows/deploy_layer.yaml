@@ -28,6 +28,10 @@ on:
         required: true
       pulumi-config-passphrase:
         required: true
+      pulumi-backend-account-name:
+        required: true
+      pulumi-backend-account-key:
+        required: true
 
 jobs:
   deploy:
@@ -47,6 +51,8 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.arm-tenant-id }}
 
       PULUMI_CONFIG_PASSPHRASE: ${{ secrets.pulumi-passphrase }}
+      AZURE_STORAGE_ACCOUNT: ${{ secrets.pulumi-backend-account-name }}
+      AZURE_STORAGE_KEY: ${{ secrets.pulumi-backend-account-key }}
 
       INFRA_PROJECT_PATH: ${{ github.workspace }}/src/Officify.Infra.Host
       INFRA_STATE_CONTAINER_NAME: 'officify-infra'

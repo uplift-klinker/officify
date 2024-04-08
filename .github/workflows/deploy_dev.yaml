@@ -23,3 +23,5 @@ jobs:
       arm-subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       arm-tenant-id: ${{ secrets.ARM_TENANT_ID }}
       pulumi-config-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+      pulumi-backend-account-name: ${{ secrets.PULUMI_BACKEND_ACCOUNT_NAME }}
+      pulumi-backend-account-key: ${{ secrets.PULUMI_BACKEND_ACCOUNT_KEY }}
