@@ -16,7 +16,7 @@ public class ApiStackTests
         await functionApp.HttpsOnly.Should().HaveValueAsync(true);
 
         var sitConfig = await functionApp.SiteConfig.GetValueAsync();
-        var appSettings = sitConfig?.AppSettings.ToDictionary(d => d.Name, d => d.Value);
+        var appSettings = sitConfig?.AppSettings.ToDictionary(d => d.Name ?? "", d => d.Value);
         appSettings.Should().Contain("FUNCTIONS_EXTENSION_VERSION", "~4");
         appSettings.Should().Contain("FUNCTIONS_WORKER_RUNTIME", "dotnet-isolated");
     }

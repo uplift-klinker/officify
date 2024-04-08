@@ -35,7 +35,7 @@ public record ConfiguredHttpResponse(
         {
             return await Matcher.Invoke(content);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return false;
         }

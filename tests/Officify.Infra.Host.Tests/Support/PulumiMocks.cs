@@ -15,7 +15,7 @@ public class PulumiMocks : IMocks
             outputs.Add("name", LocateActualResourceName(args));
         }
         args.Id ??= $"{args.Name}_id";
-        return Task.FromResult((args.Id, (object)outputs));
+        return Task.FromResult<(string?, object state)>((args.Id, outputs));
     }
 
     public Task<object> CallAsync(MockCallArgs args)
