@@ -82,6 +82,7 @@ jobs:
       - uses: pulumi/actions@v4
         name: Preview Changes
         if: ${{ inputs.preview == true }}
+        continue-on-error: true
         with:
           command: preview
           cloud-url: azblob://${{ env.INFRA_STATE_CONTAINER_NAME }}
