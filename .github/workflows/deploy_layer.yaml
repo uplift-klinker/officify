@@ -80,7 +80,7 @@ jobs:
         name: Login To Infra
 
       - uses: pulumi/actions@v4
-        name: Deploy Changes
+        name: Preview Changes
         if: ${{ inputs.preview == true }}
         with:
           command: preview
