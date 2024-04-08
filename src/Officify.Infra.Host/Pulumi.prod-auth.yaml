@@ -1,1 +1,3 @@
 encryptionsalt: v1:BH/gmIiFvXU=:v1:NHx+FRHnEExMIOjR:DuYv33a7iJDeKPd/hF4cp4ev7vqapw==
+config:
+  azure-native:location: northcentralus
