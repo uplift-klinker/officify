@@ -26,7 +26,6 @@ on:
       pulumi-config-passphrase:
         required: true
 
-name: Deploy ${{ inputs.target-env }} ${{ inputs.layer-name }}
 jobs:
   deploy:
     runs-on: ubuntu-22.04
