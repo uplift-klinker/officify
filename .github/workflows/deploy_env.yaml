@@ -23,7 +23,6 @@ jobs:
         with:
           target-env: ${{ inputs.target-env }}
           target-layer: 'persist'
-        secrets:
           auth0-client-id: ${{ inputs.auth0-client-id }}
           auth0-client-secret: ${{ inputs.auth0-client-secret }}
           auth0-domain: ${{ inputs.auth0-domain }}
@@ -32,7 +31,6 @@ jobs:
         with:
           target-env: ${{ inputs.target-env }}
           target-layer: 'auth'
-        secrets:
           auth0-client-id: ${{ inputs.auth0-client-id }}
           auth0-client-secret: ${{ inputs.auth0-client-secret }}
           auth0-domain: ${{ inputs.auth0-domain }}
@@ -41,7 +39,6 @@ jobs:
         with:
           target-env: ${{ inputs.target-env }}
           target-layer: 'api'
-        secrets:
           auth0-client-id: ${{ inputs.auth0-client-id }}
           auth0-client-secret: ${{ inputs.auth0-client-secret }}
           auth0-domain: ${{ inputs.auth0-domain }}
@@ -50,7 +47,6 @@ jobs:
         with:
           target-env: ${{ inputs.target-env }}
           target-layer: 'site'
-        secrets:
           auth0-client-id: ${{ inputs.auth0-client-id }}
           auth0-client-secret: ${{ inputs.auth0-client-secret }}
           auth0-domain: ${{ inputs.auth0-domain }}
