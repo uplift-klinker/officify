@@ -16,7 +16,10 @@ public class AuthStackTests
         resourceServers.Should().HaveCount(1);
 
         var resourceServer = resourceServers.Single();
-        await resourceServer.Identifier.Should().HaveValueAsync("https://dev.officify.api.com");
+        await resourceServer.Name.Should().HaveValueAsync("Officify Dev Api");
+        await resourceServer
+            .Identifier.Should()
+            .HaveValueAsync("https://api.dev.officify.p3-uplift.com");
         await resourceServer.AllowOfflineAccess.Should().HaveValueAsync(true);
     }
 

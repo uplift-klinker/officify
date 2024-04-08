@@ -11,7 +11,9 @@ public class ResourceNaming(DeploymentInstance deployment)
     public string LayerName => StackName.Split("-")[1];
     public string ApplicationName => "officify";
 
-    public string ApiAudienceIdentifier => $"https://{EnvironmentName}.{ApplicationName}.api.com";
+    public string ApiResourceServerName => $"{ApplicationName} {EnvironmentName} Api".Titleize();
+    public string ApiAudienceIdentifier =>
+        $"https://api.{EnvironmentName}.{ApplicationName}.p3-uplift.com";
     public string WebAppAuthClientName => $"{ApplicationName} {EnvironmentName} Web App".Titleize();
     public string AuthTenantName => $"p3-uplift-auth-{EnvironmentName}".ToLowerInvariant();
     public string TestingUserName => $"{EnvironmentName}.{ApplicationName}.test.user";

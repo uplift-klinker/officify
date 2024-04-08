@@ -49,6 +49,7 @@ public class AuthStack : OfficifyStackBase
             "backend-resource-server",
             new ResourceServerArgs
             {
+                Name = Naming.ApiResourceServerName,
                 Identifier = Naming.ApiAudienceIdentifier,
                 AllowOfflineAccess = true
             }
@@ -62,6 +63,7 @@ public class AuthStack : OfficifyStackBase
             new ClientArgs
             {
                 Name = Naming.WebAppAuthClientName,
+                AppType = "spa",
                 OidcConformant = true,
                 Callbacks = GetCallbackUrls()
             }
