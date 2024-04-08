@@ -74,7 +74,7 @@ jobs:
 
       - uses: pulumi/actions@v4
         name: Deploy Changes
-        if: ${{ inputs.preview == 'true' }}
+        if: ${{ inputs.preview == true }}
         with:
           command: preview
           cloud-url: azblob://${{ env.INFRA_STATE_CONTAINER_NAME }}
@@ -83,7 +83,7 @@ jobs:
 
       - uses: pulumi/actions@v4
         name: Deploy Changes
-        if: ${{ inputs.preview == 'false' }} 
+        if: ${{ inputs.preview == false }} 
         with:
           command: up
           cloud-url: azblob://${{ env.INFRA_STATE_CONTAINER_NAME }}
