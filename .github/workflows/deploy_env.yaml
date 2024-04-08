@@ -23,7 +23,6 @@ on:
       pulumi-config-passphrase:
         required: true
 
-name: Deploy ${{ inputs.target-env }}
 jobs: 
   persistence:
     name: Deploy Persistence
