@@ -14,7 +14,10 @@ public class ResourceNaming(DeploymentInstance deployment)
     public string ApiResourceServerName => $"{ApplicationName} {EnvironmentName} Api".Titleize();
     public string ApiAudienceIdentifier =>
         $"https://api.{EnvironmentName}.{ApplicationName}.p3-uplift.com";
+
+    public string ApiClientSecretName => $"{ApiResourceServerName} Secret".Titleize();
     public string WebAppAuthClientName => $"{ApplicationName} {EnvironmentName} Web App".Titleize();
+    public string WebAppClientSecretName => $"{WebAppAuthClientName} Secret".Titleize();
     public string AuthTenantName => $"p3-uplift-auth-{EnvironmentName}".ToLowerInvariant();
     public string TestingUserName => $"{EnvironmentName}.{ApplicationName}.test.user";
     public string TestingUserEmail => $"{TestingUserName}@noreply.com";

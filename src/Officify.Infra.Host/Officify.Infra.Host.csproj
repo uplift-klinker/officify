@@ -10,6 +10,7 @@
         <PackageReference Include="Pulumi.AzureAD" Version="5.47.2"/>
         <PackageReference Include="Pulumi.Auth0" Version="3.3.0"/>
         <PackageReference Include="Pulumi.Random" Version="4.16.0"/>
+        <PackageReference Include="Pulumiverse.Time" Version="0.0.17" />
     </ItemGroup>
     
     <ItemGroup>

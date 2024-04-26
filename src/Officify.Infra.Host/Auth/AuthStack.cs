@@ -1,20 +1,13 @@
 using Officify.Infra.Host.Common;
 using Pulumi;
-using Pulumi.Auth0;
-using Pulumi.Random;
+using Pulumi.AzureAD;
+using Pulumiverse.Time;
 
 namespace Officify.Infra.Host.Auth;
 
 public class AuthStack : OfficifyStackBase
 {
     public const string LayerName = "auth";
-    private const string UsernamePasswordAuthConnectionName = "Username-Password-Authentication";
-
-    [Output("test-user-password")]
-    public Output<string> TestUserPassword { get; set; }
-
-    [Output("test-user-email")]
-    public Output<string?> TestUserEmail { get; set; }
 
     [Output("web-app-client-id")]
     public Output<string> WebAppClientId { get; set; }
@@ -26,92 +19,56 @@ public class AuthStack : OfficifyStackBase
     public Output<string> ApiAudience { get; set; }
 
     public AuthStack()
-        : base()
     {
-        var apiResourceServer = CreateBackendResourceServer();
-        ApiAudience = apiResourceServer.Identifier;
+        var secretTiming = new Rotating("rotating-secret", new RotatingArgs { RotationYears = 1 });
 
-        var webAppClient = CreateWebAppClient();
-        var webAppClientCredentials = CreateWebAppClientCredentials(webAppClient);
-        WebAppClientId = webAppClient.ClientId;
-        WebAppClientSecret = Output.CreateSecret(webAppClientCredentials.ClientSecret);
-
-        var testUserPassword = CreateRandomPassword();
-        TestUserPassword = Output.CreateSecret(testUserPassword.Result);
-
-        var testUser = CreateTestUser(testUserPassword);
-        TestUserEmail = testUser.Email;
-    }
-
-    private ResourceServer CreateBackendResourceServer()
-    {
-        return new ResourceServer(
-            "backend-resource-server",
-            new ResourceServerArgs
+        var webClientApp = new ApplicationRegistration(
+            "ad-web-client",
+            new ApplicationRegistrationArgs { DisplayName = Naming.WebAppAuthClientName, }
+        );
+        var redirectUris = new ApplicationRedirectUris(
+            "ad-web-client-redirects",
+            new ApplicationRedirectUrisArgs
             {
-                Name = Naming.ApiResourceServerName,
-                Identifier = Naming.ApiAudienceIdentifier,
-                AllowOfflineAccess = true
+                ApplicationId = webClientApp.Id,
+                RedirectUris = GetCallbackUrls(),
+                Type = "SPA"
             }
         );
-    }
-
-    private Client CreateWebAppClient()
-    {
-        return new Client(
-            "web-app-client",
-            new ClientArgs
+        var webClientSecret = new ApplicationPassword(
+            "ad-web-client-secret",
+            new ApplicationPasswordArgs
             {
-                Name = Naming.WebAppAuthClientName,
-                AppType = "spa",
-                OidcConformant = true,
-                Callbacks = GetCallbackUrls()
+                ApplicationId = webClientApp.Id,
+                DisplayName = Naming.WebAppClientSecretName,
+                RotateWhenChanged = { { "rotation", secretTiming.Id } }
             }
         );
-    }
+        WebAppClientId = webClientApp.ClientId;
+        WebAppClientSecret = Output.CreateSecret(webClientSecret.Value);
 
-    private ClientCredentials CreateWebAppClientCredentials(Client client)
-    {
-        return new ClientCredentials(
-            "web-app-client-credentials",
-            new ClientCredentialsArgs
+        var apiClientApp = new ApplicationRegistration(
+            "ad-api-client",
+            new ApplicationRegistrationArgs { DisplayName = Naming.ApiResourceServerName }
+        );
+        var apiIdentifier = new ApplicationIdentifierUri(
+            "ad-api-client-identifier",
+            new ApplicationIdentifierUriArgs
             {
-                ClientId = client.ClientId,
-                AuthenticationMethod = "client_secret_post"
+                ApplicationId = apiClientApp.Id,
+                IdentifierUri = Naming.ApiAudienceIdentifier,
             }
         );
-    }
-
-    private static RandomPassword CreateRandomPassword()
-    {
-        return new RandomPassword(
-            "test-user-pwd",
-            new RandomPasswordArgs
+        var apiClientSecret = new ApplicationPassword(
+            "ad-api-client-secret",
+            new ApplicationPasswordArgs
             {
-                MinLower = 5,
-                MinNumeric = 5,
-                MinSpecial = 5,
-                MinUpper = 5,
-                Length = 32
+                ApplicationId = apiClientApp.Id,
+                DisplayName = Naming.ApiClientSecretName,
+                RotateWhenChanged = { { "rotation", secretTiming.Id } }
             }
         );
-    }
-
-    private User CreateTestUser(RandomPassword password)
-    {
-        return new User(
-            "test-user",
-            new UserArgs
-            {
-                Name = Naming.TestingUserName,
-                Email = Naming.TestingUserEmail,
-                EmailVerified = true,
-                GivenName = "Test",
-                FamilyName = "User",
-                Password = password.Result,
-                ConnectionName = UsernamePasswordAuthConnectionName,
-            }
-        );
+        ApiAudience = apiIdentifier.IdentifierUri;
     }
 
     private string[] GetCallbackUrls()
