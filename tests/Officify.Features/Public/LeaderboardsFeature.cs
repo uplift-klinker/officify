@@ -1,11 +1,13 @@
+using Officify.Features.Support;
+
 namespace Officify.Features.Public;
 
-public class LeaderboardsFeature : PageTest
+public class LeaderboardsFeature : OfficifyPageTest
 {
     [Test]
     public async Task WhenNavigatingToLeaderboardThenShowsEmptyLeaders()
     {
-        await Page.GotoAsync("http://localhost:5001/leaderboard");
+        await Page.GotoAsync($"{BaseUrl}/leaderboard");
 
         await Expect(
                 Page.GetByRole(AriaRole.Listitem, new PageGetByRoleOptions { Name = "leader" })

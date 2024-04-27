@@ -2,19 +2,17 @@ using System.Text.RegularExpressions;
 
 namespace Officify.Features.Support;
 
-public class AuthRequiredTest : PageTest
+public class AuthRequiredTest : OfficifyPageTest
 {
-    protected FeatureTestSettings Settings => FeatureTestSettings.Instance;
-
     protected async Task Login(string username, string password)
     {
-        await Page.GotoAsync(Settings.LoginUrl);
+        await Page.GotoAsync(BaseUrl);
+        await Page.GetByRoleRegex(AriaRole.Button, "login").ClickAsync();
+        await Page.WaitForURLAsync(url => url.Contains("microsoft"));
+
         await Page.GetByLabel("username").FillAsync(username);
         await Page.GetByLabel("password").FillAsync(password);
-        await Page.GetByRole(
-                AriaRole.Button,
-                new PageGetByRoleOptions { NameRegex = new("login", RegexOptions.IgnoreCase) }
-            )
-            .ClickAsync();
+        await Page.GetByRoleRegex(AriaRole.Button, "login").ClickAsync();
+        await Page.WaitForURLAsync(url => url.Contains(BaseUrl));
     }
 }

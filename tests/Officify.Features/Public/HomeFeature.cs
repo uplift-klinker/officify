@@ -1,13 +1,14 @@
 using System.Text.RegularExpressions;
+using Officify.Features.Support;
 
 namespace Officify.Features.Public;
 
-public class HomeFeature : PageTest
+public class HomeFeature : OfficifyPageTest
 {
     [Test]
     public async Task WhenUnauthenticatedThenNavigatesToDashboard()
     {
-        await Page.GotoAsync("http://localhost:5001/");
+        await Page.GotoAsync(BaseUrl);
 
         await Expect(Page).ToHaveURLAsync(new Regex(".*home"));
     }
@@ -15,7 +16,7 @@ public class HomeFeature : PageTest
     [Test]
     public async Task WhenNavigatingToLeaderboardThenShowsLeaderboards()
     {
-        await Page.GotoAsync("http://localhost:5001");
+        await Page.GotoAsync(BaseUrl);
 
         await Page.GetByRole(AriaRole.Link, new PageGetByRoleOptions { Name = "Leaderboard" })
             .ClickAsync();

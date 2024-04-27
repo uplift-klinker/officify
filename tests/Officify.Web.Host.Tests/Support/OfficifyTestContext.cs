@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using MudBlazor.Services;
 using Officify.Models;
 using Officify.Models.Competitions;
 using LeaderboardItemModel = Officify.Models.Leaderboard.LeaderboardItemModel;

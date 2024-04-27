@@ -1,8 +1,5 @@
 using Officify.Infra.Host.Auth;
-using Pulumi.Auth0;
 using Pulumi.AzureAD;
-using Pulumi.Random;
-using User = Pulumi.Auth0.User;
 
 namespace Officify.Infra.Host.Tests.Auth;
 
