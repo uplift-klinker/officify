@@ -13,4 +13,9 @@
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Officify.Api\Officify.Api.csproj" />
+    <ProjectReference Include="..\Officify.Web\Officify.Web.csproj" />
+  </ItemGroup>
+
 </Project>

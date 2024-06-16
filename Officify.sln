@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".husky", ".husky", "{39CEFC
 		.husky\task-runner.json = .husky\task-runner.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.ServiceDefaults", "src\Officify.ServiceDefaults\Officify.ServiceDefaults.csproj", "{A1AF9296-76AA-49D1-A75F-C58918D573FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{D758E06E-2AE3-4810-A134-1C893F3E514A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D758E06E-2AE3-4810-A134-1C893F3E514A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D758E06E-2AE3-4810-A134-1C893F3E514A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A6F412DE-8222-44B4-8318-0190143775B8} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
@@ -69,5 +75,6 @@ Global
 		{907B8BDB-5307-411C-8AA0-5DA39D1F524D} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{44E63132-EA16-4E6C-AF50-D99A029AC6C7} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{D758E06E-2AE3-4810-A134-1C893F3E514A} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
+		{A1AF9296-76AA-49D1-A75F-C58918D573FF} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 	EndGlobalSection
 EndGlobal
