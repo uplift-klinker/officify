@@ -1,5 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Officify.Infra.Host\Officify.Infra.Host.csproj" />
-  </ItemGroup>
-</Project>
