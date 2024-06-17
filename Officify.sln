@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4662B939-B0F7-4FFB-AC26-CACB84E29DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Api", "src\Officify.Api\Officify.Api.csproj", "{A6F412DE-8222-44B4-8318-0190143775B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Api.Host", "src\Officify.Api.Host\Officify.Api.Host.csproj", "{A6F412DE-8222-44B4-8318-0190143775B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Web", "src\Officify.Web\Officify.Web.csproj", "{7875CD47-A7D4-49D0-8260-7F48666925B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Web.Host", "src\Officify.Web.Host\Officify.Web.Host.csproj", "{7875CD47-A7D4-49D0-8260-7F48666925B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.AppHost", "src\Officify.AppHost\Officify.AppHost.csproj", "{907B8BDB-5307-411C-8AA0-5DA39D1F524D}"
 EndProject
@@ -54,6 +54,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\build_and_test.yaml = .github\workflows\build_and_test.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host.Tests", "tests\Officify.Infra.Host.Tests\Officify.Infra.Host.Tests.csproj", "{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Web.Host.Tests", "tests\Officify.Web.Host.Tests\Officify.Web.Host.Tests.csproj", "{39083039-804D-43F5-A170-8201477F13D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Api.Host.Tests", "tests\Officify.Api.Host.Tests\Officify.Api.Host.Tests.csproj", "{63425AB0-C097-478D-8DFC-C84A97EB0911}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host", "src\Officify.Infra.Host\Officify.Infra.Host.csproj", "{659AA3B1-6EE8-406D-B0E4-E4278B988AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +107,22 @@ Global
 		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39083039-804D-43F5-A170-8201477F13D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39083039-804D-43F5-A170-8201477F13D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39083039-804D-43F5-A170-8201477F13D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39083039-804D-43F5-A170-8201477F13D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63425AB0-C097-478D-8DFC-C84A97EB0911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63425AB0-C097-478D-8DFC-C84A97EB0911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63425AB0-C097-478D-8DFC-C84A97EB0911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63425AB0-C097-478D-8DFC-C84A97EB0911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{659AA3B1-6EE8-406D-B0E4-E4278B988AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{659AA3B1-6EE8-406D-B0E4-E4278B988AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{659AA3B1-6EE8-406D-B0E4-E4278B988AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{659AA3B1-6EE8-406D-B0E4-E4278B988AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A6F412DE-8222-44B4-8318-0190143775B8} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
@@ -111,5 +135,9 @@ Global
 		{010DD15F-4620-40D6-8390-A80AD88F4548} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{9D6E3DF1-44A2-4831-B14E-38ACBCEDBDD5} = {5B8D89C0-DCDC-4120-AD32-56F3ADBC04C5}
+		{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
+		{39083039-804D-43F5-A170-8201477F13D6} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
+		{63425AB0-C097-478D-8DFC-C84A97EB0911} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
+		{659AA3B1-6EE8-406D-B0E4-E4278B988AE6} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 	EndGlobalSection
 EndGlobal
