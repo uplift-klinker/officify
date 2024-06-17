@@ -1,0 +1,41 @@
+name: 'Build And Test'
+on:
+  push:
+    branches:
+      - main
+  pull_request: 
+    types:
+      - synchronize
+      - reopened
+      - opened
+
+concurrency: 'build_and_test'
+jobs: 
+  main:
+    name: 'Build And Test'
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+
+      - run: dotnet tool restore
+        name: Restore Dotnet Tools
+
+      - run: dotnet restore
+        name: Restore Packages
+
+      - name: Build
+        run: dotnet build -t:Rebuild --no-restore
+        
+      - name: Unit Tests
+        run: dotnet test --no-build --no-restore

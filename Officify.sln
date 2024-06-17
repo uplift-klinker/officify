@@ -36,6 +36,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{8FB16D72-2455-455B-BA41-3662BF2F6371}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Core.Tests", "tests\Officify.Core.Tests\Officify.Core.Tests.csproj", "{38AB50D7-33C9-448F-8E60-833514C94627}"
@@ -45,6 +46,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.ServiceDefaults.Core", "src\Officify.ServiceDefaults.Core\Officify.ServiceDefaults.Core.csproj", "{010DD15F-4620-40D6-8390-A80AD88F4548}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.ServiceDefaults.AspNetCore", "src\Officify.ServiceDefaults.AspNetCore\Officify.ServiceDefaults.AspNetCore.csproj", "{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5B8D89C0-DCDC-4120-AD32-56F3ADBC04C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9D6E3DF1-44A2-4831-B14E-38ACBCEDBDD5}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build_and_test.yaml = .github\workflows\build_and_test.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,5 +110,6 @@ Global
 		{5CB2FBC2-2F1E-4854-84C7-427CAA7277A9} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{010DD15F-4620-40D6-8390-A80AD88F4548} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
+		{9D6E3DF1-44A2-4831-B14E-38ACBCEDBDD5} = {5B8D89C0-DCDC-4120-AD32-56F3ADBC04C5}
 	EndGlobalSection
 EndGlobal
