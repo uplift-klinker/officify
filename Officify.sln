@@ -33,7 +33,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".husky", ".husky", "{39CEFC
 		.husky\task-runner.json = .husky\task-runner.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.ServiceDefaults", "src\Officify.ServiceDefaults\Officify.ServiceDefaults.csproj", "{A1AF9296-76AA-49D1-A75F-C58918D573FF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{8FB16D72-2455-455B-BA41-3662BF2F6371}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Core.Tests", "tests\Officify.Core.Tests\Officify.Core.Tests.csproj", "{38AB50D7-33C9-448F-8E60-833514C94627}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Models", "src\Officify.Models\Officify.Models.csproj", "{5CB2FBC2-2F1E-4854-84C7-427CAA7277A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.ServiceDefaults.Core", "src\Officify.ServiceDefaults.Core\Officify.ServiceDefaults.Core.csproj", "{010DD15F-4620-40D6-8390-A80AD88F4548}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.ServiceDefaults.AspNetCore", "src\Officify.ServiceDefaults.AspNetCore\Officify.ServiceDefaults.AspNetCore.csproj", "{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,10 +75,22 @@ Global
 		{D758E06E-2AE3-4810-A134-1C893F3E514A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D758E06E-2AE3-4810-A134-1C893F3E514A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D758E06E-2AE3-4810-A134-1C893F3E514A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1AF9296-76AA-49D1-A75F-C58918D573FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38AB50D7-33C9-448F-8E60-833514C94627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38AB50D7-33C9-448F-8E60-833514C94627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38AB50D7-33C9-448F-8E60-833514C94627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38AB50D7-33C9-448F-8E60-833514C94627}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB2FBC2-2F1E-4854-84C7-427CAA7277A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB2FBC2-2F1E-4854-84C7-427CAA7277A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB2FBC2-2F1E-4854-84C7-427CAA7277A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB2FBC2-2F1E-4854-84C7-427CAA7277A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010DD15F-4620-40D6-8390-A80AD88F4548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010DD15F-4620-40D6-8390-A80AD88F4548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010DD15F-4620-40D6-8390-A80AD88F4548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010DD15F-4620-40D6-8390-A80AD88F4548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A6F412DE-8222-44B4-8318-0190143775B8} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
@@ -75,6 +98,9 @@ Global
 		{907B8BDB-5307-411C-8AA0-5DA39D1F524D} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{44E63132-EA16-4E6C-AF50-D99A029AC6C7} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{D758E06E-2AE3-4810-A134-1C893F3E514A} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
-		{A1AF9296-76AA-49D1-A75F-C58918D573FF} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
+		{38AB50D7-33C9-448F-8E60-833514C94627} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
+		{5CB2FBC2-2F1E-4854-84C7-427CAA7277A9} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
+		{010DD15F-4620-40D6-8390-A80AD88F4548} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
+		{0C1252D9-5E93-4B44-A83F-718E70DE1DC5} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 	EndGlobalSection
 EndGlobal
