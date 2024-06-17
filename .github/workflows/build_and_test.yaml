@@ -30,6 +30,12 @@ jobs:
 
       - run: dotnet tool restore
         name: Restore Dotnet Tools
+      
+      - run: dotnet workload update
+        name: Update Workloads
+      
+      - run: dotnet workload install aspire
+        name: Install Aspire Workload
 
       - run: dotnet restore
         name: Restore Packages
