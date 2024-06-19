@@ -1,0 +1,49 @@
+name: 'Continuous Integration'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - synchronize
+      - reopened
+      - opened
+
+jobs:
+  build_and_test: 
+    name: Build and Test
+    uses: ./.github/workflows/build_and_test.yaml
+    
+  preivew_dev:
+    name: Preview Dev Changes
+    uses: ./.github/workflows/preview_env.yaml
+    needs: [ build_and_test ]
+    concurrency: 'preview_dev'
+    with:
+      target-env: 'dev'
+    secrets:
+      arm-client-id: ${{ secrets.ARM_CLIENT_ID }}
+      arm-client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm-subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm-tenant-id: ${{ secrets.ARM_TENANT_ID }}
+      pulumi-config-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+      pulumi-backend-account-name: ${{ secrets.PULUMI_BACKEND_ACCOUNT_NAME }}
+      pulumi-backend-account-key: ${{ secrets.PULUMI_BACKEND_ACCOUNT_KEY }}
+      pulumi-backend-container-name: ${{ secrets.PULUMI_BACKEND_CONTAINER_NAME }}
+
+  preivew_prod:
+    name: Preview Dev Changes
+    uses: ./.github/workflows/preview_env.yaml
+    needs: [ build_and_test ]
+    concurrency: 'preview_prod'
+    with:
+      target-env: 'prod'
+    secrets:
+      arm-client-id: ${{ secrets.ARM_CLIENT_ID }}
+      arm-client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm-subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm-tenant-id: ${{ secrets.ARM_TENANT_ID }}
+      pulumi-config-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+      pulumi-backend-account-name: ${{ secrets.PULUMI_BACKEND_ACCOUNT_NAME }}
+      pulumi-backend-account-key: ${{ secrets.PULUMI_BACKEND_ACCOUNT_KEY }}
+      pulumi-backend-container-name: ${{ secrets.PULUMI_BACKEND_CONTAINER_NAME }}

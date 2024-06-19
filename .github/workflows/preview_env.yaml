@@ -1,0 +1,68 @@
+name: Deploy Env (reusable)
+on:
+  workflow_call:
+    inputs:
+      target-env:
+        required: true
+        type: string
+      preview:
+        required: true
+        type: boolean
+    
+    secrets:
+      arm-client-id:
+        required: true
+      arm-client-secret:
+        required: true
+      arm-subscription-id:
+        required: true
+      arm-tenant-id:
+        required: true
+      pulumi-backend-container-name:
+        required: true
+      pulumi-config-passphrase:
+        required: true
+      pulumi-backend-account-name:
+        required: true
+      pulumi-backend-account-key:
+        required: true
+
+jobs:
+  persistence:
+    name: Persistence
+    uses: ./.github/workflows/preview_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'persist'
+      preview: ${{ inputs.preview }}
+  
+  auth:
+    name: Auth
+    needs: [persistence]
+    uses: ./.github/workflows/preview_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'auth'
+      preview: ${{ inputs.preview }}
+  
+  api:
+    name: Api
+    needs: [auth, persistence]
+    uses: ./.github/workflows/preview_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'api'
+      preview: ${{ inputs.preview }}
+
+  site:
+    name: Site
+    needs: [api]
+    uses: ./.github/workflows/preview_layer.yaml
+    secrets: inherit
+    with:
+      target-env: ${{ inputs.target-env }}
+      target-layer: 'site'
+      preview: ${{ inputs.preview }}

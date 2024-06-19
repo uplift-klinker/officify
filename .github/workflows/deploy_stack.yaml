@@ -1,0 +1,85 @@
+name: Deploy Stack (reusable)
+on:
+  workflow_call:
+    inputs:
+      target-layer:
+        required: true
+        type: string
+      target-env:
+        required: true
+        type: string
+
+    secrets:
+      arm-client-id:
+        required: true
+      arm-client-secret:
+        required: true
+      arm-subscription-id:
+        required: true
+      arm-tenant-id:
+        required: true
+        
+      pulumi-config-passphrase:
+        required: true
+      pulumi-backend-container-name:
+        required: true
+      pulumi-backend-account-name:
+        required: true
+      pulumi-backend-account-key:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    name: ${{ inputs.target-layer }}
+    env:
+      STACK_NAME: ${{ inputs.target-env }}-${{ inputs.target-layer }}
+      TARGET_LAYER_NAME: ${{ inputs.target-layer }}
+      
+      AUTH0_CLIENT_ID: ${{ secrets.auth0-client-id }}
+      AUTH0_CLIENT_SECRET: ${{ secrets.auth0-client-secret }}
+      AUTH0_DOMAIN: ${{ secrets.auth0-domain }}
+
+      ARM_CLIENT_ID: ${{ secrets.arm-client-id }}
+      ARM_CLIENT_SECRET: ${{ secrets.arm-client-secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.arm-subscription-id }}
+      ARM_TENANT_ID: ${{ secrets.arm-tenant-id }}
+
+      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.pulumi-config-passphrase }}
+      AZURE_STORAGE_ACCOUNT: ${{ secrets.pulumi-backend-account-name }}
+      AZURE_STORAGE_KEY: ${{ secrets.pulumi-backend-account-key }}
+
+      INFRA_PROJECT_PATH: ${{ github.workspace }}/src/Officify.Infra.Host
+      INFRA_STATE_CONTAINER_NAME: ${{ secrets.pulumi-backend-container-name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+
+      - run: dotnet tool restore
+        name: Restore Dotnet Tools
+
+      - run: dotnet restore --locked-mode
+        name: Restore Packages
+
+      - run: ${{ github.workspace }}/scripts/infra-login.sh
+        name: Login To Infra
+
+      - uses: pulumi/actions@v5
+        name: Deploy Changes
+        with:
+          command: up
+          cloud-url: azblob://${{ env.INFRA_STATE_CONTAINER_NAME }}
+          stack-name: ${{ env.STACK_NAME }}
+          work-dir: ${{ env.INFRA_PROJECT_PATH }}
+          comment-on-summary: true
+          comment-on-pr: true

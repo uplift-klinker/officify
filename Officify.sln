@@ -52,6 +52,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9D6E3DF1-44A2-4831-B14E-38ACBCEDBDD5}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build_and_test.yaml = .github\workflows\build_and_test.yaml
+		.github\workflows\preview_stack.yaml = .github\workflows\preview_stack.yaml
+		.github\workflows\deploy_stack.yaml = .github\workflows\deploy_stack.yaml
+		.github\workflows\deploy_env.yaml = .github\workflows\deploy_env.yaml
+		.github\workflows\preview_env.yaml = .github\workflows\preview_env.yaml
+		.github\workflows\main.yaml = .github\workflows\main.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host.Tests", "tests\Officify.Infra.Host.Tests\Officify.Infra.Host.Tests.csproj", "{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}"
@@ -61,6 +66,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Api.Host.Tests", "tests\Officify.Api.Host.Tests\Officify.Api.Host.Tests.csproj", "{63425AB0-C097-478D-8DFC-C84A97EB0911}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host", "src\Officify.Infra.Host\Officify.Infra.Host.csproj", "{659AA3B1-6EE8-406D-B0E4-E4278B988AE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{DEB4E554-AD3D-44E6-BA07-F333B29944EE}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\infra-login.sh = scripts\infra-login.sh
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

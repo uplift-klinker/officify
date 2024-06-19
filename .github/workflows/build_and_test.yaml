@@ -1,15 +1,6 @@
 name: 'Build And Test'
 on:
-  push:
-    branches:
-      - main
-  pull_request: 
-    types:
-      - synchronize
-      - reopened
-      - opened
-
-concurrency: 'build_and_test'
+  workflow_call: 
 jobs: 
   main:
     name: 'Build And Test'
