@@ -49,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         
-      - uses: ./.github/actions/setup-dotnet.yaml
+      - uses: ./.github/actions/setup-dotnet
 
       - run: ${{ github.workspace }}/scripts/infra-login.sh
         name: Login To Infra
