@@ -2,7 +2,7 @@ name: Deploy Stack (reusable)
 on:
   workflow_call:
     inputs:
-      target-layer:
+      target-stack:
         required: true
         type: string
       target-env:
@@ -31,15 +31,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-22.04
-    name: ${{ inputs.target-layer }}
+    name: ${{ inputs.target-stack }}
     env:
-      STACK_NAME: ${{ inputs.target-env }}-${{ inputs.target-layer }}
-      TARGET_LAYER_NAME: ${{ inputs.target-layer }}
+      STACK_NAME: ${{ inputs.target-env }}-${{ inputs.target-stack }}
       
-      AUTH0_CLIENT_ID: ${{ secrets.auth0-client-id }}
-      AUTH0_CLIENT_SECRET: ${{ secrets.auth0-client-secret }}
-      AUTH0_DOMAIN: ${{ secrets.auth0-domain }}
-
       ARM_CLIENT_ID: ${{ secrets.arm-client-id }}
       ARM_CLIENT_SECRET: ${{ secrets.arm-client-secret }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.arm-subscription-id }}
@@ -48,9 +43,9 @@ jobs:
       PULUMI_CONFIG_PASSPHRASE: ${{ secrets.pulumi-config-passphrase }}
       AZURE_STORAGE_ACCOUNT: ${{ secrets.pulumi-backend-account-name }}
       AZURE_STORAGE_KEY: ${{ secrets.pulumi-backend-account-key }}
+      BACKEND_CONTAINER_NAME: ${{ secrets.pulumi-backend-container-name }}
 
       INFRA_PROJECT_PATH: ${{ github.workspace }}/src/Officify.Infra.Host
-      INFRA_STATE_CONTAINER_NAME: ${{ secrets.pulumi-backend-container-name }}
     steps:
       - uses: actions/checkout@v4
 
@@ -68,7 +63,13 @@ jobs:
       - run: dotnet tool restore
         name: Restore Dotnet Tools
 
-      - run: dotnet restore --locked-mode
+      - run: dotnet workload update
+        name: Update Workloads
+
+      - run: dotnet workload install aspire
+        name: Install Aspire Workload
+
+      - run: dotnet restore
         name: Restore Packages
 
       - run: ${{ github.workspace }}/infra-login.sh
@@ -78,7 +79,7 @@ jobs:
         name: Preview Changes
         with:
           command: preview
-          cloud-url: azblob://${{ env.INFRA_STATE_CONTAINER_NAME }}
+          cloud-url: azblob://${{ env.BACKEND_CONTAINER_NAME }}
           stack-name: ${{ env.STACK_NAME }}
           work-dir: ${{ env.INFRA_PROJECT_PATH }}
           comment-on-summary: true

@@ -7,7 +7,7 @@ function azure_login() {
 }
 
 function pulumi_login() {
-  pulumi login "azblob://${INFRA_STATE_CONTAINER_NAME}"
+  pulumi login "azblob://${BACKEND_CONTAINER_NAME}"
 }
 
 function main() {
