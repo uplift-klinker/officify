@@ -12,6 +12,7 @@ on:
 jobs:
   build_and_test: 
     name: Build and Test
+    concurrency: 'build_and_test'
     uses: ./.github/workflows/build_and_test.yaml
     
   preivew_dev:
@@ -32,7 +33,7 @@ jobs:
       pulumi-backend-container-name: ${{ secrets.PULUMI_BACKEND_CONTAINER_NAME }}
 
   preivew_prod:
-    name: Preview Dev Changes
+    name: Preview Prod Changes
     uses: ./.github/workflows/preview_env.yaml
     needs: [ build_and_test ]
     concurrency: 'preview_prod'
