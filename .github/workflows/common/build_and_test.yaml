@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflows/setup_dotnet.yaml
+      - uses: ./.github/workflows/common/setup-dotnet
 
       - name: Build
         run: dotnet build -t:Rebuild --no-restore
