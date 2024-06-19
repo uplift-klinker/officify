@@ -13,11 +13,11 @@ jobs:
   build_and_test: 
     name: Build and Test
     concurrency: 'build_and_test'
-    uses: ./.github/workflows/build_and_test.yaml
+    uses: ./.github/workflows/common/build_and_test.yaml
     
   preivew_dev:
     name: Preview Dev Changes
-    uses: ./.github/workflows/preview_env.yaml
+    uses: ./.github/workflows/common/preview_env.yaml
     needs: [ build_and_test ]
     concurrency: 'preview_dev'
     with:
@@ -34,7 +34,7 @@ jobs:
 
   preivew_prod:
     name: Preview Prod Changes
-    uses: ./.github/workflows/preview_env.yaml
+    uses: ./.github/workflows/common/preview_env.yaml
     needs: [ build_and_test ]
     concurrency: 'preview_prod'
     with:
