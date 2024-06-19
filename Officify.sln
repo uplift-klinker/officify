@@ -52,6 +52,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9D6E3DF1-44A2-4831-B14E-38ACBCEDBDD5}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\main.yaml = .github\workflows\main.yaml
+		.github\workflows\build_and_test.yaml = .github\workflows\build_and_test.yaml
+		.github\workflows\deploy_env.yaml = .github\workflows\deploy_env.yaml
+		.github\workflows\deploy_stack.yaml = .github\workflows\deploy_stack.yaml
+		.github\workflows\preview_env.yaml = .github\workflows\preview_env.yaml
+		.github\workflows\preview_stack.yaml = .github\workflows\preview_stack.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host.Tests", "tests\Officify.Infra.Host.Tests\Officify.Infra.Host.Tests.csproj", "{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}"
@@ -68,13 +73,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{DEB4
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{27B7C12E-1F1E-452E-A48A-D6F91ED1172A}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\common\build_and_test.yaml = .github\workflows\common\build_and_test.yaml
-		.github\workflows\common\deploy_env.yaml = .github\workflows\common\deploy_env.yaml
-		.github\workflows\common\deploy_stack.yaml = .github\workflows\common\deploy_stack.yaml
-		.github\workflows\common\preview_env.yaml = .github\workflows\common\preview_env.yaml
-		.github\workflows\common\preview_stack.yaml = .github\workflows\common\preview_stack.yaml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup-dotnet", "setup-dotnet", "{E9423445-BF51-475A-953B-D79B15AE16A5}"
 	ProjectSection(SolutionItems) = preProject

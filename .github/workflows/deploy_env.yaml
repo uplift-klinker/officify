@@ -28,7 +28,7 @@ on:
 jobs:
   persistence:
     name: Persistence
-    uses: ./.github/workflows/common/preview_stack.yaml
+    uses: ./.github/workflows/deploy_stack.yaml
     secrets: inherit
     with:
       target-env: ${{ inputs.target-env }}
@@ -37,7 +37,7 @@ jobs:
   auth:
     name: Auth
     needs: [persistence]
-    uses: ./.github/workflows/common/preview_stack.yaml
+    uses: ./.github/workflows/deploy_stack.yaml
     secrets: inherit
     with:
       target-env: ${{ inputs.target-env }}
@@ -46,7 +46,7 @@ jobs:
   api:
     name: Service
     needs: [auth, persistence]
-    uses: ./.github/workflows/common/preview_stack.yaml
+    uses: ./.github/workflows/deploy_stack.yaml
     secrets: inherit
     with:
       target-env: ${{ inputs.target-env }}
@@ -55,7 +55,7 @@ jobs:
   site:
     name: Site
     needs: [api]
-    uses: ./.github/workflows/common/preview_stack.yaml
+    uses: ./.github/workflows/deploy_stack.yaml
     secrets: inherit
     with:
       target-env: ${{ inputs.target-env }}
