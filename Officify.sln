@@ -72,11 +72,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{DEB4
 		scripts\infra-login.sh = scripts\infra-login.sh
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{27B7C12E-1F1E-452E-A48A-D6F91ED1172A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup-dotnet", "setup-dotnet", "{E9423445-BF51-475A-953B-D79B15AE16A5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{106E4441-7A77-42FA-A913-E58CB109C40A}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\common\setup-dotnet\action.yaml = .github\workflows\common\setup-dotnet\action.yaml
+		.github\actions\setup_dotnet.yaml = .github\actions\setup_dotnet.yaml
 	EndProjectSection
 EndProject
 Global
@@ -156,7 +154,6 @@ Global
 		{39083039-804D-43F5-A170-8201477F13D6} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
 		{63425AB0-C097-478D-8DFC-C84A97EB0911} = {56313EBC-16ED-49F2-8DA5-48F297AF68EF}
 		{659AA3B1-6EE8-406D-B0E4-E4278B988AE6} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
-		{27B7C12E-1F1E-452E-A48A-D6F91ED1172A} = {9D6E3DF1-44A2-4831-B14E-38ACBCEDBDD5}
-		{E9423445-BF51-475A-953B-D79B15AE16A5} = {27B7C12E-1F1E-452E-A48A-D6F91ED1172A}
+		{106E4441-7A77-42FA-A913-E58CB109C40A} = {5B8D89C0-DCDC-4120-AD32-56F3ADBC04C5}
 	EndGlobalSection
 EndGlobal
