@@ -1,0 +1,26 @@
+name: 'Setup .NET'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-dotnet@v4
+      with:
+        global-json-file: global.json
+
+    - uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget
+
+    - run: dotnet tool restore
+      name: Restore Dotnet Tools
+
+    - run: dotnet workload update
+      name: Update Workloads
+
+    - run: dotnet workload install aspire
+      name: Install Aspire Workload
+
+    - run: dotnet restore
+      name: Restore Packages

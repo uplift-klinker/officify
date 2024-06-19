@@ -7,29 +7,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: global.json
-
-      - uses: actions/cache@v4
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget
-
-      - run: dotnet tool restore
-        name: Restore Dotnet Tools
-      
-      - run: dotnet workload update
-        name: Update Workloads
-      
-      - run: dotnet workload install aspire
-        name: Install Aspire Workload
-
-      - run: dotnet restore
-        name: Restore Packages
+      - uses: ./.github/workflows/setup_dotnet.yaml
 
       - name: Build
         run: dotnet build -t:Rebuild --no-restore

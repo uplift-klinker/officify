@@ -57,6 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\deploy_env.yaml = .github\workflows\deploy_env.yaml
 		.github\workflows\preview_env.yaml = .github\workflows\preview_env.yaml
 		.github\workflows\main.yaml = .github\workflows\main.yaml
+		.github\workflows\setup_dotnet.yaml = .github\workflows\setup_dotnet.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host.Tests", "tests\Officify.Infra.Host.Tests\Officify.Infra.Host.Tests.csproj", "{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}"

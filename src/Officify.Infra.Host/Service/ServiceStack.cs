@@ -4,5 +4,5 @@ namespace Officify.Infra.Host.Service;
 
 public class ServiceStack : OfficifyStackBase
 {
-    public const string Name = "Service";
+    public const string Name = "service";
 }
