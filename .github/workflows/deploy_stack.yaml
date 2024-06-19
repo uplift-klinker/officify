@@ -48,7 +48,9 @@ jobs:
       INFRA_PROJECT_PATH: ${{ github.workspace }}/src/Officify.Infra.Host
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-dotnet
+        
+      - name: Setup .NET
+        uses: ./.github/actions/setup-dotnet
 
       - run: ${{ github.workspace }}/scripts/infra-login.sh
         name: Login To Infra
