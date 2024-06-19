@@ -1,4 +1,5 @@
 name: 'Setup .NET'
+description: Setups up .NET installation, and restores packages
 runs:
   using: "composite"
   steps:
@@ -14,13 +15,17 @@ runs:
           ${{ runner.os }}-nuget
 
     - run: dotnet tool restore
+      shell: bash
       name: Restore Dotnet Tools
 
     - run: dotnet workload update
+      shell: bash
       name: Update Workloads
 
     - run: dotnet workload install aspire
+      shell: bash
       name: Install Aspire Workload
 
     - run: dotnet restore
+      shell: bash
       name: Restore Packages
