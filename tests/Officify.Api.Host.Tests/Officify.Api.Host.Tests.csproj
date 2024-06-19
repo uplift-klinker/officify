@@ -8,4 +8,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Officify.Api.Host\Officify.Api.Host.csproj" />
+  </ItemGroup>
+
 </Project>
