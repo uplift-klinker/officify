@@ -1,3 +1,4 @@
+using Humanizer;
 using Pulumi;
 
 namespace Officify.Infra.Host.Common;
@@ -30,6 +31,14 @@ public class ResourceNaming(DeploymentInstance deploymentInstance)
     public string LogAnalyticsWorkspaceName()
     {
         return GenerateName(parts: ["log", .. BaseNameParts()]);
+    }
+
+    public string AzureAdApplication(string appName)
+    {
+        return GenerateName(
+            separator: " ",
+            parts: [ApplicationName, EnvironmentName, appName]
+        ).Titleize();
     }
 
     private static string GenerateName(string separator = "-", params string[] parts)

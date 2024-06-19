@@ -5,7 +5,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-    <PackageReference Include="Pulumi" Version="3.64.0"/>
+    <PackageReference Include="Pulumi" Version="3.64.0" />
     <PackageReference Include="Pulumi.AzureNative" Version="2.45.0" />
+    <PackageReference Include="Pulumi.AzureAD" Version="5.52.0" />
   </ItemGroup>
 </Project>
