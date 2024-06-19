@@ -72,7 +72,7 @@ jobs:
       - run: dotnet restore
         name: Restore Packages
 
-      - run: ${{ github.workspace }}/infra-login.sh
+      - run: ${{ github.workspace }}/scripts/infra-login.sh
         name: Login To Infra
 
       - uses: pulumi/actions@v5
