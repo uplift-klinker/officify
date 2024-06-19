@@ -44,13 +44,13 @@ jobs:
       target-stack: 'auth'
   
   api:
-    name: Api
+    name: Service
     needs: [auth, persistence]
     uses: ./.github/workflows/preview_stack.yaml
     secrets: inherit
     with:
       target-env: ${{ inputs.target-env }}
-      target-stack: 'api'
+      target-stack: 'service'
 
   site:
     name: Site

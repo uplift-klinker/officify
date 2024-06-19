@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Officify.Infra.Host.Common;
+
+var stackName = Environment.GetEnvironmentVariable("PULUMI_STACK");
+var stackType = stackName.GetStackTypeFromStackName();
+var runAsyncMethod = stackType.CreateDeploymentRunAsyncMethodForStack();
+return await runAsyncMethod.RunAsync();
