@@ -6,7 +6,7 @@ using AzureOperationalInsights = Pulumi.AzureNative.OperationalInsights;
 
 namespace Officify.Infra.Host.Tests.Persistence;
 
-public class PersistenceStackTests
+public class PersistenceStackTests() : PulumiStackTest<PersistenceStack>(PersistenceStack.Name)
 {
     [Fact]
     public async Task WhenPersistenceStackIsDeployedThenCreatesResourceGroup()
@@ -41,10 +41,5 @@ public class PersistenceStackTests
 
         var sku = await workspace.Sku.GetValueAsync();
         sku?.Name.Should().Be($"{AzureOperationalInsights.WorkspaceSkuNameEnum.PerGB2018}");
-    }
-
-    private static async Task<TResource[]> DeployAsync<TResource>()
-    {
-        return await PulumiTesting.DeployAndGetResourcesOfType<PersistenceStack, TResource>(PersistenceStack.Name);
     }
 }
