@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Officify.Infra.Host.Auth;
 using Officify.Infra.Host.Persistence;
 using Officify.Infra.Host.Service;
@@ -7,6 +8,15 @@ namespace Officify.Infra.Host.Common;
 
 public static class StringExtensions
 {
+    private static readonly ImmutableDictionary<string, Type> StackNameToStackType = ImmutableDictionary<string, Type>
+        .Empty
+        .Add(ServiceStack.Name, typeof(ServiceStack))
+        .Add(WebStack.Name, typeof(WebStack))
+        .Add(AuthStack.Name, typeof(AuthStack))
+        .Add(PersistenceStack.Name, typeof(PersistenceStack));
+
+    private static readonly ImmutableArray<string> ValidStackNames = [.. StackNameToStackType.Keys];
+
     public static Type GetStackTypeFromStackName(this string? stackName)
     {
         if (string.IsNullOrWhiteSpace(stackName))
@@ -22,25 +32,15 @@ public static class StringExtensions
             );
         }
 
-        var layerName = splitStack[1];
-        var validLayerNames = new[]
+        var stack = splitStack[1];
+        if (StackNameToStackType.TryGetValue(stack, out var stackType))
         {
-            ServiceStack.Name,
-            WebStack.Name,
-            AuthStack.Name,
-            PersistenceStack.Name
-        };
-        return layerName switch
-        {
-            ServiceStack.Name => typeof(ServiceStack),
-            AuthStack.Name => typeof(AuthStack),
-            WebStack.Name => typeof(WebStack),
-            PersistenceStack.Name => typeof(PersistenceStack),
-            _
-                => throw new InvalidOperationException(
-                    $"Target layer was '{layerName}' which was not found in: {string.Join(",", validLayerNames)}"
-                )
-        };
+            return stackType;
+        }
+
+        throw new InvalidOperationException(
+            $"Target stack was '{stack}' which was not found in: {string.Join(",", ValidStackNames)}"
+        );
     }
 
     public static bool EqualsIgnoreCase(this string? actual, string? expected)
