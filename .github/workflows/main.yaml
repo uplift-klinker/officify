@@ -51,6 +51,6 @@ jobs:
       
   prepare_artifacts:
     name: Prepare Artifacts
-    uses: ./.github/workflows/prepare_artifacts.yaml
+    uses: ./.github/workflows/prep_artifacts.yaml
     needs: [ build_and_test, preview_dev, preview_prod ]
     concurrency: 'prepare_artifacts'
