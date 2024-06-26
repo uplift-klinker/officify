@@ -4,7 +4,6 @@ on:
     types:
       - completed
     workflows: [Main Build]
-concurrency: deploy_dev
 jobs: 
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
