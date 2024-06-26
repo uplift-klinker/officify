@@ -1,0 +1,23 @@
+on:
+  workflow_run: 
+    types:
+      - completed
+    workflows: [Main Build]
+concurrency: deploy_dev
+jobs: 
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Deploy Dev
+    concurrency: 'deploy_dev'
+    uses: ./.github/workflows/deploy_env.yaml
+    with:
+      target-env: 'dev'
+    secrets:
+      arm-client-id: ${{ secrets.ARM_CLIENT_ID }}
+      arm-client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm-subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm-tenant-id: ${{ secrets.ARM_TENANT_ID }}
+      pulumi-config-passphrase: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+      pulumi-backend-account-name: ${{ secrets.PULUMI_BACKEND_ACCOUNT_NAME }}
+      pulumi-backend-account-key: ${{ secrets.PULUMI_BACKEND_ACCOUNT_KEY }}
+      pulumi-backend-container-name: ${{ secrets.PULUMI_BACKEND_CONTAINER_NAME }}

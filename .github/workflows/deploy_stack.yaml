@@ -55,6 +55,20 @@ jobs:
       - run: ${{ github.workspace }}/scripts/infra-login.sh
         name: Login To Infra
 
+      - uses: actions/download-artifact@v4
+        with:
+          name: service-host
+          path: ${{ github.workspace }}/dist/service-host
+          github-token: ${{ github.token }}
+          repository: workflows/main.yaml
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-host
+          path: ${{ github.workspace }}/dist/web-host
+          github-token: ${{ github.token }}
+          repository: workflows/main.yaml
+
       - uses: pulumi/actions@v5
         name: Deploy Changes
         with:

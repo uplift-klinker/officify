@@ -1,0 +1,12 @@
+name: Publish Apps
+description: Runs .NET Publish for the applications that will be deployed
+runs:
+  using: "composite"
+  steps:
+    - name: Publish Web Host
+      run: dotnet publish ${{ github.workspace }}/src/Officify.Web.Host --output ${{ github.workspace }}/dist/web-host
+      shell: bash
+      
+    - name: Publish Web Host
+      run: dotnet publish ${{ github.workspace }}/src/Officify.Service.Host --output ${{ github.workspace }}/dist/service-host
+      shell: bash

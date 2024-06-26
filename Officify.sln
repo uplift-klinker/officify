@@ -58,6 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\preview_env.yaml = .github\workflows\preview_env.yaml
 		.github\workflows\preview_stack.yaml = .github\workflows\preview_stack.yaml
 		.github\workflows\prep_artifacts.yaml = .github\workflows\prep_artifacts.yaml
+		.github\workflows\deploy_dev.yaml = .github\workflows\deploy_dev.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host.Tests", "tests\Officify.Infra.Host.Tests\Officify.Infra.Host.Tests.csproj", "{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}"
@@ -78,6 +79,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup-dotnet", "setup-dotnet", "{D4768731-7AA3-484C-B29D-CCFF9DDA2EB1}"
 	ProjectSection(SolutionItems) = preProject
 		.github\actions\setup-dotnet\action.yaml = .github\actions\setup-dotnet\action.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "publish-apps", "publish-apps", "{FA899BC6-47F3-4817-83C0-F598C1257743}"
+	ProjectSection(SolutionItems) = preProject
+		.github\actions\publish-apps\action.yaml = .github\actions\publish-apps\action.yaml
 	EndProjectSection
 EndProject
 Global
@@ -159,5 +165,6 @@ Global
 		{659AA3B1-6EE8-406D-B0E4-E4278B988AE6} = {4662B939-B0F7-4FFB-AC26-CACB84E29DAD}
 		{106E4441-7A77-42FA-A913-E58CB109C40A} = {5B8D89C0-DCDC-4120-AD32-56F3ADBC04C5}
 		{D4768731-7AA3-484C-B29D-CCFF9DDA2EB1} = {106E4441-7A77-42FA-A913-E58CB109C40A}
+		{FA899BC6-47F3-4817-83C0-F598C1257743} = {106E4441-7A77-42FA-A913-E58CB109C40A}
 	EndGlobalSection
 EndGlobal

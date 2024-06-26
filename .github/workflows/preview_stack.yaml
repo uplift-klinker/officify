@@ -52,6 +52,9 @@ jobs:
       - name: Setup .NET
         uses: ./.github/actions/setup-dotnet
 
+      - name: Publish Apps
+        uses: ./.github/actions/publish-apps
+
       - run: ${{ github.workspace }}/scripts/infra-login.sh
         name: Login To Infra
 

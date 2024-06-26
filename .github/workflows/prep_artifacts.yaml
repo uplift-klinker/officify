@@ -11,12 +11,9 @@ jobs:
       - name: Setup .NET
         uses: ./.github/actions/setup-dotnet
         
-      - name: Publish Web Host
-        run: dotnet publish ${{ github.workspace }}/src/Officify.Web.Host --output ${{ github.workspace }}/dist/web-host
-
-      - name: Publish Web Host
-        run: dotnet publish ${{ github.workspace }}/src/Officify.Service.Host --output ${{ github.workspace }}/dist/service-host
-
+      - name: Publish Apps
+        uses: ./.github/actions/publish-apps
+        
       - uses: actions/upload-artifact@v4
         with:
           name: Web Host
