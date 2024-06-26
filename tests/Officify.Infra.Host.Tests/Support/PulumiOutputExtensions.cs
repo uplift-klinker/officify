@@ -15,6 +15,14 @@ public static class PulumiOutputExtensions
         return completionSource.Task;
     }
 
+    public static async Task<TResult[]> GetValuesAsync<TSource, TResult>(
+        this IEnumerable<TSource> source,
+        Func<TSource, Output<TResult>> selector
+    )
+    {
+        return await Task.WhenAll(source.Select(selector).Select(o => o.GetValueAsync()));
+    }
+
     public static PulumiOutputAssertions<T> Should<T>(this Output<T> output)
     {
         return new PulumiOutputAssertions<T>(output);

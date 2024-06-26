@@ -20,11 +20,25 @@ public class ResourceNaming(DeploymentInstance deploymentInstance)
         return GenerateName(parts: ["rg", .. BaseNameParts(stackName)]);
     }
 
-    public string StorageAccountName()
+    public string StorageAccountName(string? stackName = null)
     {
         return GenerateName(
             separator: "",
-            parts: ["st", .. BaseNameParts()]
+            parts: ["st", .. BaseNameParts(stackName)]
+        );
+    }
+
+    public string AppServicePlanName()
+    {
+        return GenerateName(
+            parts: ["plan", .. BaseNameParts()]
+        );
+    }
+
+    public string FunctionAppName()
+    {
+        return GenerateName(
+            parts: ["func", .. BaseNameParts()]
         );
     }
 
@@ -39,6 +53,14 @@ public class ResourceNaming(DeploymentInstance deploymentInstance)
             separator: " ",
             parts: [ApplicationName, EnvironmentName, appName]
         ).Titleize();
+    }
+
+    public string AzureAdIdentifierUri(string appName)
+    {
+        return GenerateName(
+            separator: ".",
+            parts: [$"https://{appName}", EnvironmentName, ApplicationName, "com"]
+        );
     }
 
     private static string GenerateName(string separator = "-", params string[] parts)
