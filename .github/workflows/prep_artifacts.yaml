@@ -25,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Service Host
-          path: ${{ github.workspace }}/dist/servicw-host
+          path: ${{ github.workspace }}/dist/service-host
