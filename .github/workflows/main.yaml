@@ -15,7 +15,7 @@ jobs:
     concurrency: 'build_and_test'
     uses: ./.github/workflows/build_and_test.yaml
     
-  preivew_dev:
+  preview_dev:
     name: Preview Dev Changes
     uses: ./.github/workflows/preview_env.yaml
     needs: [ build_and_test ]
@@ -32,7 +32,7 @@ jobs:
       pulumi-backend-account-key: ${{ secrets.PULUMI_BACKEND_ACCOUNT_KEY }}
       pulumi-backend-container-name: ${{ secrets.PULUMI_BACKEND_CONTAINER_NAME }}
 
-  preivew_prod:
+  preview_prod:
     name: Preview Prod Changes
     uses: ./.github/workflows/preview_env.yaml
     needs: [ build_and_test ]
@@ -48,3 +48,9 @@ jobs:
       pulumi-backend-account-name: ${{ secrets.PULUMI_BACKEND_ACCOUNT_NAME }}
       pulumi-backend-account-key: ${{ secrets.PULUMI_BACKEND_ACCOUNT_KEY }}
       pulumi-backend-container-name: ${{ secrets.PULUMI_BACKEND_CONTAINER_NAME }}
+      
+  prepare_artifacts:
+    name: Prepare Artifacts
+    uses: ./.github/workflows/prepare_artifacts.yaml
+    needs: [ build_and_test, preview_dev, preview_prod ]
+    concurrency: 'prepare_artifacts'

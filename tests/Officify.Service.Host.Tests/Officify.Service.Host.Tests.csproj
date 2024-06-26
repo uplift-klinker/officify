@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Officify.Api.Host\Officify.Api.Host.csproj" />
+    <ProjectReference Include="..\..\src\Officify.Service.Host\Officify.Service.Host.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,28 @@
+name: Prepare Artifacts
+on:
+  workflow_call: 
+
+jobs:
+  prepare_artifacts:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: ./.github/actions/setup-dotnet
+        
+      - name: Publish Web Host
+        run: dotnet publish ${{ github.workspace }}/src/Officify.Web.Host --output ${{ github.workspace }}/dist/web-host
+
+      - name: Publish Web Host
+        run: dotnet publish ${{ github.workspace }}/src/Officify.Service.Host --output ${{ github.workspace }}/dist/service-host
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Web Host
+          path: ${{ github.workspace }}/dist/web-host
+          
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Service Host
+          path: ${{ github.workspace }}/dist/servicw-host

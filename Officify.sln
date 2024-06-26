@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4662B939-B0F7-4FFB-AC26-CACB84E29DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Api.Host", "src\Officify.Api.Host\Officify.Api.Host.csproj", "{A6F412DE-8222-44B4-8318-0190143775B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Service.Host", "src\Officify.Service.Host\Officify.Service.Host.csproj", "{A6F412DE-8222-44B4-8318-0190143775B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Web.Host", "src\Officify.Web.Host\Officify.Web.Host.csproj", "{7875CD47-A7D4-49D0-8260-7F48666925B5}"
 EndProject
@@ -57,13 +57,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\deploy_stack.yaml = .github\workflows\deploy_stack.yaml
 		.github\workflows\preview_env.yaml = .github\workflows\preview_env.yaml
 		.github\workflows\preview_stack.yaml = .github\workflows\preview_stack.yaml
+		.github\workflows\prep_artifacts.yaml = .github\workflows\prep_artifacts.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host.Tests", "tests\Officify.Infra.Host.Tests\Officify.Infra.Host.Tests.csproj", "{EC2C9078-C881-42C4-814A-E4BDC8B1F8E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Web.Host.Tests", "tests\Officify.Web.Host.Tests\Officify.Web.Host.Tests.csproj", "{39083039-804D-43F5-A170-8201477F13D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Api.Host.Tests", "tests\Officify.Api.Host.Tests\Officify.Api.Host.Tests.csproj", "{63425AB0-C097-478D-8DFC-C84A97EB0911}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Service.Host.Tests", "tests\Officify.Service.Host.Tests\Officify.Service.Host.Tests.csproj", "{63425AB0-C097-478D-8DFC-C84A97EB0911}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officify.Infra.Host", "src\Officify.Infra.Host\Officify.Infra.Host.csproj", "{659AA3B1-6EE8-406D-B0E4-E4278B988AE6}"
 EndProject

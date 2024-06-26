@@ -1,4 +1,4 @@
-namespace Officify.Api.Host.Tests;
+namespace Officify.Service.Host.Tests;
 
 public class UnitTest1
 {

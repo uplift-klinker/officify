@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Officify.Api.Host\Officify.Api.Host.csproj" />
+    <ProjectReference Include="..\Officify.Service.Host\Officify.Service.Host.csproj" />
     <ProjectReference Include="..\Officify.Web.Host\Officify.Web.Host.csproj" />
   </ItemGroup>
 

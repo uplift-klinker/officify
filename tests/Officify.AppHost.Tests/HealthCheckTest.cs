@@ -8,7 +8,7 @@ public class HealthCheckTest : OfficifyApplicationTest
     [Fact]
     public async Task WhenCheckingHealthOfApiThenReturnsOk()
     {
-        var httpClient = CreateHttpClient("api");
+        var httpClient = CreateHttpClient("service");
         var response = await httpClient.GetAsync("/health");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

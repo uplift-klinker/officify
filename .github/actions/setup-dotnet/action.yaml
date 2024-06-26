@@ -25,6 +25,10 @@ runs:
     - run: dotnet workload install aspire
       shell: bash
       name: Install Aspire Workload
+    
+    - run: dotnet workload install wasm-tools
+      shell: bash
+      name: Install WebAssembly Tools Workload
 
     - run: dotnet restore
       shell: bash
