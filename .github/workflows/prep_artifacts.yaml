@@ -16,10 +16,10 @@ jobs:
         
       - uses: actions/upload-artifact@v4
         with:
-          name: Web Host
+          name: web-host
           path: ${{ github.workspace }}/dist/web-host
           
       - uses: actions/upload-artifact@v4
         with:
-          name: Service Host
+          name: service-host
           path: ${{ github.workspace }}/dist/service-host
