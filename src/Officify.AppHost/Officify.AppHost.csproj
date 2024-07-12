@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.1" />
+    <PackageReference Include="Aspire.Hosting.Azure" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Officify.Service.Host\Officify.Service.Host.csproj" />
     <ProjectReference Include="..\Officify.Web.Host\Officify.Web.Host.csproj" />
+    <ProjectReference Include="..\Officify.Function.Host\Officify.Function.Host.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Azure.Monitor.OpenTelemetry.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
@@ -10,11 +11,11 @@ namespace Officify.ServiceDefaults.AspNetCore;
 
 public static class AspNetCoreHostApplicationBuilderExtensions
 {
-    public static IHostApplicationBuilder AddAspNetCoreServiceProviderDefaults(
-        this IHostApplicationBuilder builder
+    public static WebApplicationBuilder AddAspNetCoreServiceProviderDefaults(
+        this WebApplicationBuilder builder
     )
     {
-        builder.AddServiceDefaultsCore(
+        builder.Host.AddServiceDefaultsCore(
             metrics => metrics.AddAspNetCoreInstrumentation(),
             tracing => tracing.AddAspNetCoreInstrumentation()
         );

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Officify_Function_Host": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7054",
+      "launchBrowser": false
+    }
+  }
+}
